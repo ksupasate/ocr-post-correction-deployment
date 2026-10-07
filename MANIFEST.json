@@ -51,8 +51,8 @@
     },
     {
       "relative_path": "README.md",
-      "sha256": "8cc2ce6e91ab15fb8e9fc1e73ed551b45147db3781db774f776e74ebc6f4c955",
-      "byte_size": 4942,
+      "sha256": "5346d495228b66001406649c13c40a9591be59874302d149910be0d4ebae2c4c",
+      "byte_size": 4990,
       "purpose": "release documentation or support",
       "source": "Authored from identified frozen sources",
       "generated": true,

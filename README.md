@@ -29,9 +29,9 @@ Online Resource 3 is supplied separately to avoid large numerical files in the s
 From this directory, with OR3 extracted at `../online_resource_3`:
 
 ```sh
-python scripts/release_artifact_checks.py --resource ../online_resource_3
-python scripts/release_artifact_checks.py --manifest ../online_resource_3/MANIFEST.json
-python scripts/stage_release_replay.py --resource ../online_resource_3 --output ../replay
+uv run --locked python scripts/release_artifact_checks.py --resource ../online_resource_3
+uv run --locked python scripts/release_artifact_checks.py --manifest ../online_resource_3/MANIFEST.json
+uv run --locked python scripts/stage_release_replay.py --resource ../online_resource_3 --output ../replay
 cd ../replay
 uv sync --locked --extra dev
 make check
