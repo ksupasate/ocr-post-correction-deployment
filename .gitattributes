@@ -1,0 +1,2 @@
+# Preserve released bytes across Git checkouts for source-hash validation.
+* -text

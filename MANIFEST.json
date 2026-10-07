@@ -5,6 +5,17 @@
   "self_reference_rule": "Manifest excludes itself; parent ledger hashes this file",
   "files": [
     {
+      "relative_path": ".gitattributes",
+      "sha256": "c94301608549d262f8e27249de88c238d362849944cfb49df69f58d14fe9a227",
+      "byte_size": 83,
+      "purpose": "release documentation or support",
+      "source": "Authored from identified frozen sources",
+      "generated": true,
+      "generation_command": "scripts/finalize_public_release.py",
+      "scientific_role": "administrative; not evidence",
+      "licence": "MIT (software only)"
+    },
+    {
       "relative_path": ".gitignore",
       "sha256": "62f87925c9adcd44af865ff40f52f6756284519563703ef70aebf0f4bd515605",
       "byte_size": 498,
