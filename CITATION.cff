@@ -1,10 +1,20 @@
 cff-version: 1.2.0
-message: "Cite this software; manuscript authors must be filled before publication. No DOI assigned."
+message: "Cite this software. No DOI assigned yet."
 title: 'Software for "When ranking is not enough: selecting deployment cutoffs for OCR post-correction under generator and population shift"'
 type: software
 authors:
   - family-names: Vorathammathorn
     given-names: Supasate
+    affiliation: School of Information Technology, King Mongkut's Institute of Technology Ladkrabang
+  - family-names: Sintarasirikulchai
+    given-names: Wassana
+    affiliation: Kasikorn Labs, Kasikorn Business Technology Group
+  - family-names: Sakdejayont
+    given-names: Theerat
+    affiliation: Kasikorn Labs, Kasikorn Business Technology Group
+  - family-names: Panichpapiboon
+    given-names: Sooksan
+    affiliation: School of Information Technology, King Mongkut's Institute of Technology Ladkrabang
 repository-code: "https://github.com/ksupasate/ocr-risk"
 license: MIT
 version: v1.0.0
@@ -17,4 +27,11 @@ preferred-citation:
   type: article
   title: "When ranking is not enough: selecting deployment cutoffs for OCR post-correction under generator and population shift"
   authors:
-    - family-names: "<MANUSCRIPT_AUTHORS_IN_PUBLICATION_ORDER>"
+    - family-names: Vorathammathorn
+      given-names: Supasate
+    - family-names: Sintarasirikulchai
+      given-names: Wassana
+    - family-names: Sakdejayont
+      given-names: Theerat
+    - family-names: Panichpapiboon
+      given-names: Sooksan
