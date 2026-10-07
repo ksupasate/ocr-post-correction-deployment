@@ -561,17 +561,6 @@
       "source_sha256": "8f0aee2cc1ca64c71c770ab4494cc13497cf82480067f788e580ca67a99fe24f"
     },
     {
-      "relative_path": "results/generated/raw_ocr_baseline.csv",
-      "sha256": "668f2b4b38cc92225ae05bcdc97bf052f75f25b7c183e2db98c19aa0f7b74ab2",
-      "byte_size": 837,
-      "purpose": "release documentation or support",
-      "source": "Authored from identified frozen sources",
-      "generated": true,
-      "generation_command": "scripts/finalize_public_release.py",
-      "scientific_role": "administrative; not evidence",
-      "licence": "MIT (software only)"
-    },
-    {
       "relative_path": "results/generated/sgv1/reserve/pre_access_freshness_snapshot.json",
       "sha256": "4eb1d26283e7d331f5a971b435ad3d8deafda020f77788a51dddd4e2809cce39",
       "byte_size": 1654,
