@@ -80,7 +80,7 @@ all-engines = [
 ocr-risk = "ocr_risk.cli.app:main"
 
 [project.urls]
-Repository = "https://github.com/ksupasate/ocr-risk"
+Repository = "https://github.com/ksupasate/ocr-post-correction-deployment"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ocr_risk"]

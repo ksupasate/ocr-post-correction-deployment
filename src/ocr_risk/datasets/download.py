@@ -27,7 +27,7 @@ from ocr_risk.io.hashing import file_sha256
 __all__ = ["ChecksumMismatchError", "DownloadSpec", "download", "extract_zip"]
 
 _CHUNK = 1 << 20
-_USER_AGENT = "ocr-risk/0.1 (research; +https://github.com/ksupasate/ocr-risk)"
+_USER_AGENT = "ocr-post-correction-deployment/0.1 (research; +https://github.com/ksupasate/ocr-post-correction-deployment)"
 
 
 class ChecksumMismatchError(RuntimeError):

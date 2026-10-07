@@ -15,7 +15,7 @@ authors:
   - family-names: Panichpapiboon
     given-names: Sooksan
     affiliation: School of Information Technology, King Mongkut's Institute of Technology Ladkrabang
-repository-code: "https://github.com/ksupasate/ocr-risk"
+repository-code: "https://github.com/ksupasate/ocr-post-correction-deployment"
 license: MIT
 version: v1.0.0
 keywords:

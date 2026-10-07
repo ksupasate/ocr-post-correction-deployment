@@ -48,8 +48,8 @@ Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/). The environment is p
 `uv.lock`:
 
 ```sh
-git clone https://github.com/ksupasate/ocr-risk.git
-cd ocr-risk
+git clone https://github.com/ksupasate/ocr-post-correction-deployment.git
+cd ocr-post-correction-deployment
 uv sync --locked --extra dev
 ```
 
@@ -58,8 +58,8 @@ They are not needed for replaying the reported results, and the test suite runs 
 
 ## Reproducing reported artifacts
 
-The public release reproduces the reported tables and figures from the frozen corrected
-result registry. It does not regenerate OCR outputs, correction candidates, or model fits.
+The public release reproduces the reported tables and figures from the frozen result
+registry. It does not regenerate OCR outputs, correction candidates, or model fits.
 
 Online Resource 3 (numerical reproducibility package) is distributed separately. Extract it
 next to this repository, then verify and replay:
