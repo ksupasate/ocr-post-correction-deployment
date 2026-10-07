@@ -1,82 +1,149 @@
-# Software for "When ranking is not enough: selecting deployment cutoffs for OCR post-correction under generator and population shift"
+# OCR Post-Correction Deployment Evaluation
 
-**Provisional release workspace. Final manuscript reconciliation and author metadata remain pending.**
+This repository contains the code, configuration, tests, and frozen result artifacts for the
+study "When ranking is not enough: selecting deployment cutoffs for OCR post-correction under
+generator and population shift". The study evaluates the relationship between ranking
+candidate corrections and selecting a deployment cutoff when the correction generator and the
+candidate-site population change.
 
-This is the software component of a corrected VF2 research release. It includes the actual
-`src/ocr_risk` implementation, required script dependencies, environment lock, configurations,
-tests, prompts and parsers embedded in those implementations. It contains no legacy result packages.
-The evidence is a corrective re-analysis on previously observed test outcomes, with FUNSD
-form/document and OCR-D volume group isolation. Ranking quality, site-winner ranking, cutoff
-selection and deployment are distinct; stricter-harm and matched-site population sensitivities
-have separate meanings. No causal generator effect or formal safety certificate is claimed.
+## Overview
 
-## Install and environment
+Automatic OCR post-correction proposes replacement text for spans an OCR engine may have
+misread. A correction can repair an error, but it can also damage text that was already
+correct. The pipeline in this repository separates two decisions:
 
-Use Python >=3.11 and uv. The unchanged `pyproject.toml` and `uv.lock` are authoritative:
+- **Ranking.** Each correction site may receive several candidate corrections. A
+  LambdaMART-style boosted-tree ranker orders the candidates at a site using features computed
+  without ground-truth labels.
+- **Deployment.** Only the highest-ranked candidate at a site (the *site winner*) enters the
+  automatic decision. A cutoff selected from labelled cutoff-selection pages determines
+  whether the site winner is applied or the original OCR text is preserved. An applied edit is
+  *harmful* when it increases character-level edit distance to the reference transcription.
+
+The ranker is transferred in both directions between a text-only (TXT) correction generator
+and a vision-language (VLM) generator, evaluated on scanned forms (FUNSD) and historical
+German prints (OCR-D). The analysis reports ranking quality (AUROC), deployment metrics
+(application coverage, harmful fraction among applied edits, exact-repair recall), and
+sensitivity of the deployment conclusions to a stricter harm definition and to sites shared by
+both generators. The full experimental design is described in the manuscript and its
+Supplement (Online Resource 1).
+
+## Repository structure
+
+- `src/ocr_risk/` — the research platform: candidate construction, alignment, evidence
+  features, ranking, cutoff-selection policies, risk control, metrics, statistics, and
+  experiment runners.
+- `scripts/` — analysis pipeline for the reported study, figure/table replay, dataset
+  acquisition, and release validation scripts.
+- `configs/` — YAML configuration for experiments, datasets, engines, and verifiers.
+- `tests/` — unit, architecture, leakage, invariants, integration, and smoke tests.
+- `docs/` — protocol and methodology documentation, dataset licensing notes, and the
+  reproducibility test report.
+- `manifests/` — dataset, licence, split, and group manifests used by the pipeline.
+- `results/` — synthetic smoke-test outputs and retained generated support files.
+
+## Installation
+
+Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/). The environment is pinned by
+`uv.lock`:
 
 ```sh
+git clone https://github.com/ksupasate/ocr-risk.git
+cd ocr-risk
 uv sync --locked --extra dev
 ```
 
-Heavy OCR backends and external model/API extras are optional. They are unnecessary for frozen
-artifact replay. `make smoke` exercises synthetic data only and produces no research result.
-See [the test report](docs/REPRODUCIBILITY_TEST_REPORT.md) for tested commands and
-[release preparation notes](docs/RELEASE_PREPARATION.md) for documented adaptations.
+Heavy OCR backends (PaddleOCR, EasyOCR, docTR) and external model APIs are optional extras.
+They are not needed for replaying the reported results, and the test suite runs without them.
 
-## Reproduce frozen figures and tables
+## Reproducing reported artifacts
 
-Online Resource 3 is supplied separately to avoid large numerical files in the software archive.
-From this directory, with OR3 extracted at `../online_resource_3`:
+The public release reproduces the reported tables and figures from the frozen corrected
+result registry. It does not regenerate OCR outputs, correction candidates, or model fits.
+
+Online Resource 3 (numerical reproducibility package) is distributed separately. Extract it
+next to this repository, then verify and replay:
 
 ```sh
+# Verify the frozen registry and package integrity
 uv run --locked python scripts/release_artifact_checks.py --resource ../online_resource_3
 uv run --locked python scripts/release_artifact_checks.py --manifest ../online_resource_3/MANIFEST.json
-uv run --locked python scripts/stage_release_replay.py --resource ../online_resource_3 --output ../replay
+
+# Stage an isolated replay workspace and check the software there
+uv run --locked python scripts/stage_release_replay.py \
+    --resource ../online_resource_3 --output ../replay
 cd ../replay
 uv sync --locked --extra dev
 make check
+
+# Regenerate Figures 2-4 and the frozen result tables
 uv run --locked python scripts/plot_paper3_vf2_figures.py --output-dir rebuild/figures
-uv run --locked python scripts/replay_frozen_tables.py --output rebuild/tables/P3_VF2_RESULT_TABLES.md
+uv run --locked python scripts/replay_frozen_tables.py \
+    --output rebuild/tables/P3_VF2_RESULT_TABLES.md
 ```
 
-The plotter checks frozen implementation/input hashes and source values before rendering
-Figures 2-4. It never fits a model or evaluates new performance. The table replay checks byte equality against the frozen corrected result tables.
-Full tests run in the staged workspace because VF2 group-integrity tests use OR3 manifests;
-authoritative CSVs are also readable directly.
-Numeric source audits must agree; PDF bytes can depend on fonts and rendering libraries.
-The final main manuscript, Table 1/2 source mapping and final Figure 1 remain unverified.
+The figure script checks frozen implementation and input hashes and re-renders from the
+registered observations; it never fits a model. The table replay checks byte equality against
+the frozen result tables. Regenerated PDF bytes can differ in fonts and rendering libraries;
+the registered source data is authoritative. Full tests are run in the staged workspace
+because the group-integrity fixtures read Online Resource 3 manifests.
+
+A complete corpus-to-results rebuild is not part of the public package: it requires the
+original corpora, frozen OCR outputs, and generator caches whose hashes are recorded in the
+Online Resource 3 provenance records.
+
+## Tests
+
+```sh
+make check   # ruff + ruff format check + strict mypy + pytest with coverage floors
+```
+
+The last validated run passed 1,889 tests (46 skipped without optional engines/licensed data)
+at 90.2% total coverage, with the original per-package coverage floors enforced as a gate.
+`make smoke` exercises the pipeline end to end on synthetic data only.
+
+## Data
+
+The evaluation corpora are public and are not redistributed here:
+
+- **FUNSD** — scanned business forms with word-level annotations
+  (https://guillaumejaume.github.io/FUNSD/).
+- **OCR-D ground truth** — historical German prints with diplomatic transcriptions
+  (https://github.com/OCR-D/gt_structure_text).
+
+Acquisition helpers are provided (`scripts/download_funsd.py`,
+`scripts/download_ocrd_sbb.py`). They verify sha256 checksums against `manifests/datasets/`
+before use. Dataset licences are recorded in `manifests/licenses/registry.yaml` and
+`docs/data_licensing.md`; follow the original dataset terms. The reproducibility package
+contains page identifiers, numeric features, labels, and scores — not corpus text or images.
 
 ## Online Resources
 
-1. Evidence-grounded Supplement draft with methods, results and literature review; author/main
-   manuscript reconciliation is still required.
-2. Existing corrected study-level literature coding CSV and bibliography/schema, kept separate
-   from experimental evidence.
-3. Corrected registries, source tables, figure data, allocation/group identifiers, numeric
-   features, labels, scores and provenance. This is the numerical reproducibility basis.
+- **Online Resource 1** — Supplement: methods, extended results, prompts, and the extended
+  literature review.
+- **Online Resource 2** — coded literature matrix (study-level coding of the reviewed work).
+- **Online Resource 3** — numerical registry, figure/table source data, allocation and group
+  manifests, and provenance records backing the replay commands above.
 
-## Original corpora and reconstruction boundaries
+## Citation
 
-Source corpus text/images are not redistributed where doing so could conflict with source
-dataset terms. Candidate text, raw OCR/annotations, fitted vocabulary resources and original
-model weights are withheld. Obtain FUNSD from https://guillaumejaume.github.io/FUNSD/ and
-OCR-D ground truth from https://github.com/OCR-D/gt_structure_text under their own terms.
-Acquisition scripts are `scripts/download_funsd.py` and `scripts/download_ocrd_sbb.py`; inspect
-the dataset manifests and licence registry first. Do not automatically download or run OCR.
+See `CITATION.cff`. If you use this software, cite the study:
 
-Acquiring corpora alone cannot promise byte-identical reconstruction: original frozen OCR,
-generator caches and contextual inputs must match the source hashes. OR3 retains reconstruction
-input manifests. No single fully portable corpus-to-final-artifact rebuild has been established
-by this preparation. Do not substitute regenerated text for a missing frozen artifact silently.
-`paper3_vf2_*` scientific execution is preserved for provenance, but is not a normal replay step.
-It can require private/licensed inputs and separate authorization for training or generation.
+> Supasate Vorathammathorn, Wassana Sintarasirikulchai, Theerat Sakdejayont, Sooksan
+> Panichpapiboon. *When ranking is not enough: selecting deployment cutoffs for OCR
+> post-correction under generator and population shift.*
 
-## Citation and licence
+A DOI will be added once the manuscript and archival deposits are published.
 
-Software metadata is in `CITATION.cff`; the manuscript title is supplied by the author, with
-manuscript-author order explicitly left as a placeholder at the author's request. No DOI is assigned.
-The known existing repository URL is https://github.com/ksupasate/ocr-risk; no new public release has been pushed.
+## Licence
 
-Author software remains MIT. `THIRD_PARTY_NOTICES.md` records scope and dependency boundaries;
-third-party datasets/models keep their own terms. Supplementary-material licensing is pending
-author review; CC BY 4.0 must not be applied to third-party source material by assumption.
+Source code in this repository is released under the MIT License. Datasets, model weights,
+and third-party materials remain under their own terms; see `THIRD_PARTY_NOTICES.md` for the
+dependency and scope boundaries.
+
+## Related article
+
+"When ranking is not enough: selecting deployment cutoffs for OCR post-correction under
+generator and population shift" — manuscript prepared for submission to the International
+Journal on Document Analysis and Recognition (IJDAR). The Supplement and reproducibility
+package are supplied as Online Resources 1–3.
