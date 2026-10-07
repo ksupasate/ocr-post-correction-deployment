@@ -1,0 +1,149 @@
+{
+  "schema_version": "sgv1-corpus-freshness-inventory-v1",
+  "generated_utc": "2026-08-30T03:16:04Z",
+  "branch": "sgv1-source-grounded-verification",
+  "evidence_classes": {
+    "repository_evidence": "manifests, run records, raw/artifact layer layout on disk",
+    "external_availability": {
+      "cord": {
+        "source": "https://datasets-server.huggingface.co/size?dataset=naver-clova-ix/cord-v2",
+        "read_date_utc": "2026-08-29",
+        "upstream_splits": {
+          "train": 800,
+          "validation": 100,
+          "test": 100
+        },
+        "note": "The six parquet shards and split census are pinned in manifests/datasets/cord.json. Repository freshness and local acquisition state are reported separately below; upstream availability is not itself a freshness claim."
+      }
+    }
+  },
+  "eligibility_rules": {
+    "sgv1_confirmatory_eligible": "document never consumed in any role by any prior phase (h1_pilot/recovery/cgv2/cgv3) nor by any SGV1 development role; dataset license permits use",
+    "sgv1_dev_eligible": "prior-phase documents are reusable as SGV1 TRAIN/DEVELOPMENT under a fresh SGV1 partition; they can never be confirmatory"
+  },
+  "consumption_summary": {
+    "prior_corpus_documents": 302,
+    "cgv3_confirmatory_reserve": 99,
+    "total_consumed_all_phases": 401
+  },
+  "datasets": {
+    "funsd": {
+      "license_id": "funsd-research-use",
+      "total_documents_on_disk": 199,
+      "consumed_by_prior_phases": {
+        "n": 199,
+        "roles": {
+          "evaluate": 20,
+          "calibrate": 20,
+          "fit": 60
+        },
+        "cgv3_confirmatory_reserve": {
+          "n": 99,
+          "ids_sha256": "f4817f242f82dc13a49eee4b700fba20f83aa440ca6d99a2139a9a9cf2e92ffe"
+        }
+      },
+      "fresh_documents": 0,
+      "sgv1_dev_eligible": true,
+      "sgv1_confirmatory_eligible_pool": "none",
+      "note": "Fully consumed. The corpus used sorted(training_data)[:100]; cgv3's confirmatory run consumed the remaining 49 training + all 50 testing documents on 2026-08-28. Prior-phase documents may serve as SGV1 TRAIN/DEVELOPMENT material under a fresh SGV1 partition; they can never be confirmatory."
+    },
+    "cord": {
+      "license_id": "CC-BY-4.0",
+      "local_extract": "test (100, previously consumed) + train (800) + validation (100)",
+      "on_disk_layout": {
+        "test": 201,
+        "train": 1601,
+        "validation": 201
+      },
+      "consumed_by_prior_phases": {
+        "n": 100,
+        "roles": {
+          "fit": 60,
+          "evaluate": 20,
+          "calibrate": 20
+        }
+      },
+      "fresh_documents": {
+        "source": "upstream train + validation splits",
+        "upstream_rows": {
+          "train": 800,
+          "validation": 100,
+          "test": 100
+        },
+        "local_trace": "acquired and fingerprinted under results/generated/sgv1/corpus_qualification",
+        "c1_status": "C1_PASS",
+        "pool_documents": 900,
+        "near_historical_exclusions": 13,
+        "fresh_after_exact_and_near_exclusion": 887,
+        "pre_role_access_development_only": 26,
+        "confirmatory_eligible_before_role_assignment": 861,
+        "confirmatory_eligible_ids_sha256": "a9c4c306e8fb7cb8c663ddbaf56fbcf041ed3cf9124c0e4c243517d4d0ea2d46",
+        "status": "qualified; role assignment still required"
+      },
+      "sgv1_dev_eligible": true,
+      "sgv1_confirmatory_eligible_pool": "qualified train/validation pool after historical-near and pre-role-access exclusions; exact ids are bound by confirmatory_eligible_ids_sha256",
+      "note": "CORD test is consumed with prior roles exactly like FUNSD. C1 compares train/validation against the full 401-document prior universe and repository history. Engine-pretraining exposure remains an interpretation limitation, not pipeline leakage; absolute OCR numbers must not be described as corpus-unseen behavior."
+    },
+    "ocrd_sbb": {
+      "license_id": "CC-BY-SA-4.0",
+      "local_extract": "31 selected volumes, 102 usable pages",
+      "consumed_by_prior_phases": {
+        "n": 102,
+        "roles": {
+          "fit": 65,
+          "calibrate": 16,
+          "evaluate": 21
+        }
+      },
+      "fresh_documents": {
+        "source": "further upstream volumes in release v1.5.0 (67 surveyed, 31 selected)",
+        "local_trace": "none",
+        "status": "excluded from fresh confirmatory headline material by benchmark design"
+      },
+      "sgv1_dev_eligible": true,
+      "sgv1_confirmatory_eligible_pool": "none for headline; possible challenge/dev material",
+      "note": "The cgv3-era benchmark design excludes OCR-D-SBB from fresh confirmatory headline material (historical German/Fraktur is the engine-availability stress track). SGV1 keeps that exclusion for headline claims; unselected volumes may be considered for development or explicitly-labelled challenge material, never silent headline pooling."
+    },
+    "gt4histocr": {
+      "license_id": "CC-BY-4.0",
+      "local_extract": "none",
+      "consumed_by_prior_phases": {
+        "n": 0,
+        "roles": {}
+      },
+      "fresh_documents": {
+        "source": "entire corpus (never ingested)",
+        "local_trace": "none",
+        "status": "requires new dataset manifest + checksums + license per-volume review"
+      },
+      "sgv1_dev_eligible": false,
+      "sgv1_confirmatory_eligible_pool": "none under the current design",
+      "note": "Licensed CC-BY-4.0 but deliberately excluded from the headline benchmark for transcription-policy incompatibility (registry note). Candidate for verifier training diversity or a labelled challenge set only, which is a design decision to make in qualification, not a default."
+    },
+    "synthetic": {
+      "license_id": "synthetic-generated",
+      "local_extract": "48 documents (smoke corpus)",
+      "consumed_by_prior_phases": {
+        "n": 48,
+        "roles": {
+          "smoke": 48
+        }
+      },
+      "fresh_documents": "unlimited (generated from seeds)",
+      "sgv1_dev_eligible": true,
+      "sgv1_confirmatory_eligible_pool": "never -- synthetic output is labelled synthetic",
+      "note": "Development and smoke material only. Any SGV1 artifact produced from it carries synthetic: true and never reaches a headline table."
+    }
+  },
+  "freshness_scan": {
+    "ids_checked": 99,
+    "text_files_scanned": 729,
+    "allowed_locations": [
+      "results/generated/cgv3/confirmatory/** (consuming run)",
+      "results/generated/sgv1/corpus_qualification/** (derived prior-identity audit)"
+    ],
+    "hits_outside_allowed": [],
+    "cord_c1_certificate": "results/generated/sgv1/corpus_qualification/c1_cord_certificate.json",
+    "cord_c1_status": "C1_PASS"
+  }
+}

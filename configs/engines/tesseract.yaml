@@ -1,0 +1,24 @@
+# Real Tesseract.
+#
+# Needs the `tesseract` binary on PATH, not a Python package: the adapter shells out and
+# parses TSV, which is the only output mode carrying per-word boxes AND per-word
+# confidence together.
+#
+#   brew install tesseract          # macOS
+#   brew install tesseract-lang     # non-English traineddata (deu, frk, ...)
+#
+# The historical-print track (OCR-D-GT-VD-SBB) is German Fraktur and will need `deu`
+# and/or `frk`; a stock macOS install ships only eng/osd/snum. The adapter's
+# availability() check reports the missing language rather than silently recognizing
+# German with an English model.
+
+engines:
+  - id: tesseract
+    adapter: tesseract
+    params:
+      lang: eng
+      # psm 3 = fully automatic page segmentation without orientation detection.
+      # psm 6 (assume a uniform block) suits single-column scans and is worth an ablation.
+      psm: 3
+      # oem 3 = default engine mode (LSTM where available, legacy otherwise).
+      oem: 3

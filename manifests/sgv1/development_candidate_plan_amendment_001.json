@@ -1,0 +1,60 @@
+{
+  "amended_code_sha256": {
+    "scripts/sgv1_development_candidates.py": "c29316a1587100a98dc46a41eab89ae333b64fea18ac51c7714a69b783efc67f",
+    "src/ocr_risk/candidates/edit_aware.py": "806b20c4d1f139f2ddcbaae9fd63fc28fe011a728580b9c4bc1147a99d465598",
+    "src/ocr_risk/candidates/lexical.py": "89157b806357c6983df6cbc2482eb647d82be32e4965b5a540d41dac4d2f74a7",
+    "src/ocr_risk/candidates/structural_v2.py": "7e7cd84d76e95a9878af94e87aa86d30d19f52486246f3d5e93bd8fec08fe936",
+    "src/ocr_risk/discovery/enumerator.py": "5356120a2db76ea13e8e3ff682fd922b7d7a7c8b79dfbc4cd946b7ec6f1e6aa1",
+    "src/ocr_risk/discovery/views.py": "745dc2ff9f5caddcc139fe777739024c5a3fb1d35063a30aabd6e0b06b114ad4",
+    "src/ocr_risk/experiments/cgv3_confirmatory.py": "cd31b78b62f346748534677e471bfe3041258ef52175119865b9e30689d23457",
+    "src/ocr_risk/experiments/cgv3_track_a.py": "85a694b90928e40af2b8a638363fcdf09c71a4b6652f875d8a6dc70d4633bdd7",
+    "src/ocr_risk/experiments/sgv1_frames.py": "d1f980c016e3be2a6f3876bd9b2ce9a6bcbd0025f06c69e5481a2321b4545189",
+    "src/ocr_risk/experiments/sgv1_reserve.py": "eabe3fbec6a7f082942c4dc27b124b3671a03561d018369778902b1a4a403095"
+  },
+  "candidate_outputs_present_at_amendment": false,
+  "confirmatory_accessed": false,
+  "ground_truth_loaded": false,
+  "issued_head": "12fa41c946ae6013181012935722373e2cb554d6",
+  "issued_utc": "2026-08-31T07:16:08Z",
+  "plan_path": "manifests/sgv1/development_candidate_plan.json",
+  "plan_sha256": "1870cd973f9b68c50191663e44ae9f13dca223c955278c6044395d46737611b2",
+  "previous_code_sha256": {
+    "scripts/sgv1_development_candidates.py": "b2452962b8541dfc154ffae56d844955c450e89cea7c599ecb4a281822b80e54",
+    "src/ocr_risk/candidates/edit_aware.py": "806b20c4d1f139f2ddcbaae9fd63fc28fe011a728580b9c4bc1147a99d465598",
+    "src/ocr_risk/candidates/lexical.py": "89157b806357c6983df6cbc2482eb647d82be32e4965b5a540d41dac4d2f74a7",
+    "src/ocr_risk/candidates/structural_v2.py": "7e7cd84d76e95a9878af94e87aa86d30d19f52486246f3d5e93bd8fec08fe936",
+    "src/ocr_risk/discovery/enumerator.py": "5356120a2db76ea13e8e3ff682fd922b7d7a7c8b79dfbc4cd946b7ec6f1e6aa1",
+    "src/ocr_risk/discovery/views.py": "745dc2ff9f5caddcc139fe777739024c5a3fb1d35063a30aabd6e0b06b114ad4",
+    "src/ocr_risk/experiments/cgv3_confirmatory.py": "cd31b78b62f346748534677e471bfe3041258ef52175119865b9e30689d23457",
+    "src/ocr_risk/experiments/cgv3_track_a.py": "85a694b90928e40af2b8a638363fcdf09c71a4b6652f875d8a6dc70d4633bdd7",
+    "src/ocr_risk/experiments/sgv1_frames.py": "d1f980c016e3be2a6f3876bd9b2ce9a6bcbd0025f06c69e5481a2321b4545189",
+    "src/ocr_risk/experiments/sgv1_reserve.py": "eabe3fbec6a7f082942c4dc27b124b3671a03561d018369778902b1a4a403095"
+  },
+  "schema_version": "sgv1-development-candidate-plan-amendment-v1",
+  "scientific_assessment": "No scientific selection or output changed. The frozen site parquet is byte-identical; pandas reports the in-memory and round-tripped frames equal. Only semantically missing values are normalized before provenance hashing. Candidate generation had not begun and no candidate artifact existed.",
+  "scope": {
+    "changed": [
+      "normalize pandas missing values (NaN and None) to None before semantic table hashing",
+      "permit only this exact amended runner hash after validating the original plan and untouched site artifacts",
+      "bind this amendment into the later candidate freeze"
+    ],
+    "unchanged": [
+      "document selection and roles",
+      "confirmatory reserve lock",
+      "canonical OCR bytes",
+      "site rows, columns, order, and parquet bytes",
+      "CGV3 discovery rules and implementation",
+      "TRAIN-only held-out-engine resources",
+      "generator ladder, union order, K=4 cap, and candidate-id rule",
+      "GT-blindness policy"
+    ]
+  },
+  "site_freeze_path": "results/generated/sgv1/dev_candidates/site_freeze.json",
+  "site_freeze_sha256": "a570c42ac698019148f24b8f80f60f93acac9e6167325bc5dcd73da964b71eb9",
+  "site_table_path": "results/generated/sgv1/dev_candidates/sites_pre_gt.parquet",
+  "site_table_pre_serialization_semantic_sha256": "0b034e80338c03f14fb98f4ecc4019caa2560007136733ea2e01e677d0b1f987",
+  "site_table_roundtrip_semantic_sha256": "72a9d8a7e3894fc5020a22765b1226e3debad80dbb4c4b34d9530e8feacd0eb6",
+  "site_table_sha256": "e29ab97c96445daeda197c2126c5afd1e387d60e474a1057489b87f1a4514f1c",
+  "status": "SCOPED_IMPLEMENTATION_AMENDMENT",
+  "trigger": "The first --candidates invocation failed closed before generation because sparse object-column nulls were float NaN in memory and None after parquet round-trip; the old hash treated those equivalent missing representations as different."
+}

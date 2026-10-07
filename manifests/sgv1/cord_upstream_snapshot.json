@@ -1,0 +1,79 @@
+{
+  "schema_version": "sgv1-cord-upstream-snapshot-v1",
+  "retrieved_utc": "2026-08-29T17:03:31Z",
+  "dataset_repository": {
+    "endpoint": "https://huggingface.co/api/datasets/naver-clova-ix/cord-v2",
+    "repo_id": "naver-clova-ix/cord-v2",
+    "author": "naver-clova-ix",
+    "observed_revision": "7f0115a4b758a71d6473b8d085751692da2fef98",
+    "last_modified": "2022-07-19T23:43:33.000Z",
+    "private": false,
+    "gated": false,
+    "disabled": false,
+    "card_license": "cc-by-4.0",
+    "license_tag": "license:cc-by-4.0"
+  },
+  "tree": {
+    "endpoint": "https://huggingface.co/api/datasets/naver-clova-ix/cord-v2/tree/7f0115a4b758a71d6473b8d085751692da2fef98/data",
+    "checksum_semantics": "Each lfs_oid is the upstream repository's SHA-256 object identifier at the pinned revision.",
+    "files": [
+      {
+        "path": "data/test-00000-of-00001-9c204eb3f4e11791.parquet",
+        "size_bytes": 234202795,
+        "lfs_oid": "51c65f1788faff392abe2a0b55b023eb23e9be551c509138eaa3a832514224e7"
+      },
+      {
+        "path": "data/train-00000-of-00004-b4aaeceff1d90ecb.parquet",
+        "size_bytes": 490224630,
+        "lfs_oid": "da3994eee1bf9bd3c57f0d53a72c3a6812c8696c5ba26245987949ddf73483cc"
+      },
+      {
+        "path": "data/train-00001-of-00004-7dbbe248962764c5.parquet",
+        "size_bytes": 441418432,
+        "lfs_oid": "cce4def16a0d6a6c75f80be712f7494c56c318a8829b712f5c62650155c9e58e"
+      },
+      {
+        "path": "data/train-00002-of-00004-688fe1305a55e5cc.parquet",
+        "size_bytes": 443802181,
+        "lfs_oid": "591e2db8fe8b1d364b054f46e8c375b7f00e72578914ba46a573b6858162cab2"
+      },
+      {
+        "path": "data/train-00003-of-00004-2d0cd200555ed7fd.parquet",
+        "size_bytes": 455555434,
+        "lfs_oid": "1ffd9de8d6fbcee7630fd4cdfedff05b9b7fabc0fae4fc17557c5fe7cf178748"
+      },
+      {
+        "path": "data/validation-00000-of-00001-cc3c5779fe22e8ca.parquet",
+        "size_bytes": 242080800,
+        "lfs_oid": "0d0f6dac11fdcc549de2746aa9f53136a3bc22a2a1aff2b0b847f7622ad60c15"
+      }
+    ]
+  },
+  "size_census": {
+    "endpoint": "https://datasets-server.huggingface.co/size?dataset=naver-clova-ix%2Fcord-v2",
+    "partial": false,
+    "failed": [],
+    "total_rows": 1000,
+    "total_parquet_bytes": 2307284272,
+    "splits": {
+      "train": {
+        "rows": 800,
+        "parquet_bytes": 1831000677
+      },
+      "validation": {
+        "rows": 100,
+        "parquet_bytes": 242080800
+      },
+      "test": {
+        "rows": 100,
+        "parquet_bytes": 234202795
+      }
+    }
+  },
+  "license": {
+    "source": "https://github.com/clovaai/cord/blob/master/LICENSE-CC-BY",
+    "retrieved_text_sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+    "name": "Creative Commons Attribution 4.0 International",
+    "id": "CC-BY-4.0"
+  }
+}

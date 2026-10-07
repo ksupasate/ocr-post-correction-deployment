@@ -1,0 +1,45 @@
+# CGV3 Track B: the one-shot fresh confirmatory execution.
+#
+# Manifests EXACTLY the 99-document CGV3 confirmatory reserve
+# (manifests/cgv3/partition_provenance.json): the 49 FUNSD training_data documents the
+# pilot did not consume (it took sorted(training_data)[:100] of 149) plus the entire
+# 50-document testing_data split. Both selections are prefix arithmetic over annotation
+# stems -- content-blind by construction, and the runner independently asserts that the
+# manifested document set equals the reserve before anything else runs.
+#
+# Alignment, sites, engine, and statistics configuration are the shared frozen defaults
+# from base.yaml / four_real.yaml -- deliberately not restated here, so this experiment
+# cannot drift from the pilot's frozen chain by an unnoticed local override. The fold
+# resources for discovery/generation stay fitted on the PILOT's seen corpus; nothing
+# about the fresh documents enters any fitted statistic.
+#
+# Engine fingerprints at freeze time (verified pre-unlock against the pilot's recorded
+# fingerprints, all four matching byte-for-byte):
+#   tesseract 5a8bd235…  paddleocr 1e05174e…  easyocr 22f3b395…  doctr 1f871e92…
+#
+# Do not edit after the unlock record exists: the run chain must see one config hash.
+
+extends:
+  - ../base.yaml
+  - ../engines/four_real.yaml
+
+name: cgv3_confirmatory
+description: >-
+  CGV3 Track B: OCR-only site discovery and candidate generation on the 99-document
+  fresh FUNSD confirmatory partition, four frozen engines, one-shot.
+synthetic: false
+seed: 20260827
+
+datasets:
+  - id: funsd
+    enabled: true
+    # The pilot consumed sorted(training_data)[:100]; the reserve is the remainder.
+    params:
+      split: training_data
+      skip: 100
+
+  - id: funsd
+    enabled: true
+    # The entire testing split is untouched reserve material.
+    params:
+      split: testing_data

@@ -1,0 +1,42 @@
+{
+  "c1_certificate_sha256": "3101f57c4d45ed79bc86498fd4ad13724b6af6ee6d9eca3957b80e6eb8cdb811",
+  "c1_status": "C1_PASS",
+  "clean": true,
+  "downstream_access_hits": [],
+  "downstream_access_scan": {
+    "explicit_exclusions": [
+      "results/generated/sgv1/corpus_qualification (C1 mechanical identity evidence)",
+      "results/generated/sgv1/reserve (the snapshot destination)"
+    ],
+    "files_scanned": 55455,
+    "hits": [],
+    "parquet_files_scanned": 118,
+    "parquet_string_columns_scanned": 1002,
+    "roots": [
+      "data/raw/ocr",
+      "data/interim",
+      "data/processed",
+      "artifacts",
+      "cache",
+      "results/generated/sgv1"
+    ],
+    "text_files_scanned": 2125
+  },
+  "git": {
+    "branch": "sgv1-source-grounded-verification",
+    "head": "e6b9a6278c085fc055b296d91927f3f5aacc691a"
+  },
+  "historical_scan_binding": {
+    "clean": true,
+    "git_commits_scanned": 137,
+    "path": "results/generated/sgv1/corpus_qualification/historical_scan.json",
+    "sha256": "aa90527f0e3fbc0eb540aa82745295fe49310f1f9ea0d58f24d0ff5b5f200428",
+    "worktree_files_scanned": 58134
+  },
+  "interpretation": "No confirmatory id was present in OCR, derived, candidate, result, artifact, or cache layers before lock. C1 identity hashing and raw acquisition are mechanical qualification, not source inspection.",
+  "issued_utc": "2026-08-30T12:37:43Z",
+  "reserve_count": 177,
+  "reserve_document_set_sha256": "27398e6b6e07efc3468aedd6deaff09ae67c000053701f5f2675f7510838830b",
+  "role_manifest_sha256": "69fb2b047d6c87222bb78659777eb2f42948a6c12197fb4159eb280ae5686ff2",
+  "schema_version": "sgv1-pre-access-freshness-snapshot-v1"
+}

@@ -1,0 +1,18 @@
+# SYNTHETIC matched-handicap smoke test.
+#
+# Proves the RH1 machinery composes: matched pairs are built, the certificate verifies,
+# both arms run, and the discrimination table and readiness gate can be produced. It is
+# NOT an experiment -- the engines are simulated and every output is watermarked
+# SYNTHETIC - NOT A RESEARCH RESULT.
+
+extends:
+  - smoke_synthetic.yaml
+
+name: smoke_rh1
+description: >-
+  Synthetic matched-handicap transfer smoke test. Architecture validation only.
+synthetic: true
+seed: 20260819
+
+splits:
+  protocol: matched_in_engine

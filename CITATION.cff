@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Cite this software; manuscript authors must be filled before publication. No DOI assigned."
+title: 'Software for "When ranking is not enough: selecting deployment cutoffs for OCR post-correction under generator and population shift"'
+type: software
+authors:
+  - family-names: Vorathammathorn
+    given-names: Supasate
+repository-code: "https://github.com/ksupasate/ocr-risk"
+license: MIT
+version: v1.0.0
+keywords:
+  - OCR post-correction
+  - cutoff selection
+  - generator shift
+  - population sensitivity
+preferred-citation:
+  type: article
+  title: "When ranking is not enough: selecting deployment cutoffs for OCR post-correction under generator and population shift"
+  authors:
+    - family-names: "<MANUSCRIPT_AUTHORS_IN_PUBLICATION_ORDER>"

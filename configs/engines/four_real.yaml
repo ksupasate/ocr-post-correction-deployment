@@ -1,0 +1,65 @@
+# The four real OCR engines the leave-one-engine-out protocol holds out in turn.
+#
+# Chosen to differ in the ways the study is about, not merely in accuracy: two
+# detector+recognizer neural pipelines (PaddleOCR, docTR), one CRNN-based detector
+# (EasyOCR), and one classical LSTM engine (Tesseract). Their confidence scales,
+# segmentation behaviour and error profiles all differ, which is what makes "transfer to
+# an unseen engine" a real question rather than a hyperparameter change.
+#
+# Recognition language is set PER DATASET. The historical track is German print, largely
+# Fraktur, and reading it with an English model produces plausible-looking garbage that
+# is worse than a failure because it looks like a result.
+#
+# PaddlePaddle and PyTorch cannot be imported into one process on macOS arm64: paddle
+# leaves torch unable to initialize a tensor. Recognition therefore runs one engine per
+# process (`ocr-risk ocr run --engine <id>`), and the experiment reads the cached raw
+# responses without constructing any backend.
+
+engines:
+  - id: tesseract
+    adapter: tesseract
+    params:
+      lang: eng
+      # psm 6 (a uniform block of text). Confirmed on FIT-SPLIT pages against 3, 4, 11
+      # and 12: mean CER 0.608 versus 0.713, 0.678, 0.676, 0.707 over 12 CORD pages.
+      #
+      # Tesseract is genuinely weak on receipt photographs -- 0.61 against PaddleOCR's
+      # 0.12 on the same pages -- and no segmentation mode rescues it. That is an engine
+      # property, not a misconfiguration, and it is exactly the kind of heterogeneity the
+      # cross-engine question is about, so it is reported rather than tuned away.
+      psm: 6
+      oem: 3
+    dataset_params:
+      ocrd_sbb:
+        # frk is the Fraktur model. deu alone is modern German type and misreads the
+        # historical letterforms; frk is trained on them.
+        lang: frk
+        # psm 3 (fully automatic) beat 4 and 6 on FIT-SPLIT pages: mean CER 0.297 against
+        # 0.312 and 0.334 over 8 pages. Chosen within fit scope only -- picking a
+        # configuration by its score on pages that will later be evaluated is selection
+        # leakage, which is why selection_scope is recorded on every run.
+        psm: 3
+
+  - id: paddleocr
+    adapter: paddleocr
+    params:
+      lang: en
+    dataset_params:
+      ocrd_sbb:
+        lang: german
+
+  - id: easyocr
+    adapter: easyocr
+    params:
+      languages: [en]
+    dataset_params:
+      ocrd_sbb:
+        languages: [de]
+
+  - id: doctr
+    adapter: doctr
+    params: {}
+    # docTR's stock recognition model uses a Latin vocabulary covering German accented
+    # characters, but there is no Fraktur-specific model in the default zoo. That is a
+    # real limitation of this arm on the historical track and is reported as one rather
+    # than papered over with a language flag that changes nothing.

@@ -1,0 +1,112 @@
+# Alignment battery.
+#
+# Expectations live here as data so a reviewer can read what each case is supposed to
+# prove without reading test code.
+#
+# `expect` lists relations that must appear; `forbid` lists relations that must not.
+# `min_resolved`, `min_ambiguous`, and `max_resolved_one_to_one` bound the STATUS
+# distribution.
+#
+# Relation and status are deliberately different things, and the battery tests both:
+#   relation = the SHAPE of the correspondence the aligner found (1:1, N:1, 1:N, ...)
+#   status   = whether that correspondence is trustworthy enough to evaluate
+# An unalignable pair can still have a 1:1 *shape*; what must not happen is for it to be
+# RESOLVED. Asserting on relation alone would either miss that or forbid a shape that is
+# legitimately reported-but-distrusted.
+#
+# The battery deliberately includes cases that must NOT align. A suite of only alignable
+# text proves nothing about the hard part, which is refusing to force a match.
+
+cases:
+  - id: clean_one_to_one
+    why: baseline; identical text must align one-to-one with full confidence
+    gt: ["Dose:", "0.015", "mg"]
+    ocr: ["Dose:", "0.015", "mg"]
+    expect: [one_to_one]
+    forbid: [split, merge, ocr_insertion, ocr_deletion]
+    min_resolved: 3
+
+  - id: substitution_visual_confusion
+    why: "rn -> m is the classic scanner error; must stay one-to-one, not split"
+    gt: ["Smith", "reported"]
+    ocr: ["Srnith", "reported"]
+    expect: [one_to_one]
+    forbid: [split, merge]
+    min_resolved: 2
+
+  - id: word_split
+    why: engine broke one ground-truth token into two spans
+    gt: ["Smith", "reported"]
+    ocr: ["Sm", "ith", "reported"]
+    expect: [split]
+    forbid: [merge]
+
+  - id: word_merge
+    why: engine ran two ground-truth tokens together, dropping the space
+    gt: ["New", "York", "office"]
+    ocr: ["NewYork", "office"]
+    expect: [merge]
+    forbid: [split]
+
+  - id: punctuation_split
+    why: trailing punctuation detached into its own span
+    gt: ["sample.", "Next"]
+    ocr: ["sample", ".", "Next"]
+    expect: [split]
+
+  - id: ocr_insertion
+    why: hallucinated span with no ground-truth counterpart
+    gt: ["Dose:", "mg"]
+    ocr: ["Dose:", "|", "mg"]
+    expect: [ocr_insertion]
+
+  - id: ocr_deletion
+    why: engine omitted a token entirely
+    gt: ["Dose:", "0.015", "mg"]
+    ocr: ["Dose:", "mg"]
+    expect: [ocr_deletion]
+
+  - id: numeric_magnitude_loss
+    why: >-
+      the harmful case this project exists for: a lost decimal separator changes the
+      value by an order of magnitude while remaining one-to-one
+    gt: ["Dose:", "0.015", "mg"]
+    ocr: ["Dose:", "0015", "mg"]
+    expect: [one_to_one]
+
+  - id: unalignable_garbage
+    why: >-
+      nothing corresponds; the aligner must refuse rather than invent a pairing. This is
+      the single most important case in the battery. A 1:1 SHAPE may still be reported —
+      what must never happen is that it is RESOLVED and therefore evaluated.
+    gt: ["Dose:", "0.015", "mg"]
+    ocr: ["zzzz", "qqqq", "wwww"]
+    max_resolved_one_to_one: 0
+    min_ambiguous: 1
+
+  - id: whitespace_only_difference
+    why: padding must not register as a character error
+    gt: ["Total:", "1249.00"]
+    ocr: ["Total:", "1249.00"]
+    expect: [one_to_one]
+    min_resolved: 2
+
+  - id: alloy_homoglyph
+    why: "Ti-6Al-4V vs Ti-6A1-4V; l/1 confusion inside a part number"
+    gt: ["Part:", "Ti-6Al-4V"]
+    ocr: ["Part:", "Ti-6A1-4V"]
+    expect: [one_to_one]
+    min_resolved: 2
+
+  - id: split_and_merge_together
+    why: both segmentation failures on one line must be typed separately
+    gt: ["alpha", "beta", "gamma", "delta"]
+    ocr: ["al", "pha", "betagamma", "delta"]
+    expect: [split, merge, one_to_one]
+
+  - id: long_line_many_tokens
+    why: exercises the decomposition path on a longer region
+    gt: ["the", "patient", "received", "a", "dose", "of", "the", "compound", "during", "trial"]
+    ocr: ["the", "patlent", "received", "a", "dose", "of", "the", "cornpound", "during", "trial"]
+    expect: [one_to_one]
+    min_resolved: 8

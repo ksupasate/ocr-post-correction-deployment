@@ -1,0 +1,76 @@
+{
+  "amended_code_sha256": {
+    "scripts/sgv1_development_candidates.py": "3558d77c0b774ed7a4667a2f42edf83efd4c79ba4893352cf3676868c6963e8e",
+    "src/ocr_risk/candidates/edit_aware.py": "806b20c4d1f139f2ddcbaae9fd63fc28fe011a728580b9c4bc1147a99d465598",
+    "src/ocr_risk/candidates/lexical.py": "89157b806357c6983df6cbc2482eb647d82be32e4965b5a540d41dac4d2f74a7",
+    "src/ocr_risk/candidates/structural_v2.py": "7e7cd84d76e95a9878af94e87aa86d30d19f52486246f3d5e93bd8fec08fe936",
+    "src/ocr_risk/discovery/enumerator.py": "5356120a2db76ea13e8e3ff682fd922b7d7a7c8b79dfbc4cd946b7ec6f1e6aa1",
+    "src/ocr_risk/discovery/views.py": "745dc2ff9f5caddcc139fe777739024c5a3fb1d35063a30aabd6e0b06b114ad4",
+    "src/ocr_risk/experiments/cgv3_confirmatory.py": "cd31b78b62f346748534677e471bfe3041258ef52175119865b9e30689d23457",
+    "src/ocr_risk/experiments/cgv3_track_a.py": "85a694b90928e40af2b8a638363fcdf09c71a4b6652f875d8a6dc70d4633bdd7",
+    "src/ocr_risk/experiments/sgv1_frames.py": "95b78835c1fec5130e95b36dbb2ad95b5347545d0fd0b75f55079f2f1e6c1511",
+    "src/ocr_risk/experiments/sgv1_reserve.py": "eabe3fbec6a7f082942c4dc27b124b3671a03561d018369778902b1a4a403095"
+  },
+  "candidate_freeze_path": "results/generated/sgv1/dev_candidates/candidate_freeze.json",
+  "candidate_freeze_sha256": "d0dbc1dd5553eda2ae730d77961c01fde72509a2b477597b61c3776381bbeb0b",
+  "candidate_outputs_present_at_amendment": true,
+  "candidate_table_path": "results/generated/sgv1/dev_candidates/candidates_pre_gt.parquet",
+  "candidate_table_sha256": "e89ef06865250443d9a8ad19fa0c27af13c1d8b157ff7fbfc9aec2d017ed3d6d",
+  "code_files_changed_since_previous_amendment": [
+    "scripts/sgv1_development_candidates.py",
+    "src/ocr_risk/experiments/sgv1_frames.py"
+  ],
+  "confirmatory_accessed": false,
+  "defect_id": "SGV1-R1",
+  "drift_commits": [
+    "f997905 SGV1-11: GT labeling -- incidents L1-L4, status-gated labels, dual frames"
+  ],
+  "ground_truth_loaded": false,
+  "guard_strength": "Not weakened. The chain still requires the current code to equal the last link's recorded hashes exactly; it adds a recorded predecessor link rather than relaxing a comparison.",
+  "issued_head": "236aeff801e73916cb898146250c5e7b7f039489",
+  "issued_utc": "2026-09-01T08:40:39Z",
+  "ladder_table_path": "results/generated/sgv1/dev_candidates/candidate_ladder_pre_gt.parquet",
+  "ladder_table_sha256": "cb6ab813f09a03e6aa2b2a2925572305d00664b8ae2647961b7f325c197cfb2e",
+  "plan_path": "manifests/sgv1/development_candidate_plan.json",
+  "plan_sha256": "1870cd973f9b68c50191663e44ae9f13dca223c955278c6044395d46737611b2",
+  "previous_code_sha256": {
+    "scripts/sgv1_development_candidates.py": "c29316a1587100a98dc46a41eab89ae333b64fea18ac51c7714a69b783efc67f",
+    "src/ocr_risk/candidates/edit_aware.py": "806b20c4d1f139f2ddcbaae9fd63fc28fe011a728580b9c4bc1147a99d465598",
+    "src/ocr_risk/candidates/lexical.py": "89157b806357c6983df6cbc2482eb647d82be32e4965b5a540d41dac4d2f74a7",
+    "src/ocr_risk/candidates/structural_v2.py": "7e7cd84d76e95a9878af94e87aa86d30d19f52486246f3d5e93bd8fec08fe936",
+    "src/ocr_risk/discovery/enumerator.py": "5356120a2db76ea13e8e3ff682fd922b7d7a7c8b79dfbc4cd946b7ec6f1e6aa1",
+    "src/ocr_risk/discovery/views.py": "745dc2ff9f5caddcc139fe777739024c5a3fb1d35063a30aabd6e0b06b114ad4",
+    "src/ocr_risk/experiments/cgv3_confirmatory.py": "cd31b78b62f346748534677e471bfe3041258ef52175119865b9e30689d23457",
+    "src/ocr_risk/experiments/cgv3_track_a.py": "85a694b90928e40af2b8a638363fcdf09c71a4b6652f875d8a6dc70d4633bdd7",
+    "src/ocr_risk/experiments/sgv1_frames.py": "d1f980c016e3be2a6f3876bd9b2ce9a6bcbd0025f06c69e5481a2321b4545189",
+    "src/ocr_risk/experiments/sgv1_reserve.py": "eabe3fbec6a7f082942c4dc27b124b3671a03561d018369778902b1a4a403095"
+  },
+  "schema_version": "sgv1-development-candidate-plan-amendment-v1",
+  "scientific_assessment": "No frozen artifact changed and no recorded number is affected. The site table, candidate table, candidate ladder and both freeze records are byte-identical to the hashes recorded at the freeze, verified here and independently by reviewer B. The sgv1_frames.py diff introduced in f997905 is confined to post-freeze, ground-truth-consuming code (FRAME_CLASS_UNRESOLVED, OUTCOME_UNRESOLVED, _ALLOWED_LABEL_COLUMNS, evaluation_class, build_frame_a, build_frame_b, _label_only_columns) and touches none of freeze_candidates, verify_frozen, or CandidateFreeze, which are the only symbols this script imports from it. git show e8a0b46:src/ocr_risk/experiments/sgv1_frames.py reproduces the hash pinned by amendment 001, so the freeze was produced under exactly the pinned code.",
+  "scope": {
+    "changed": [
+      "record the post-freeze drift of src/ocr_risk/experiments/sgv1_frames.py",
+      "generalize the amendment mechanism from a single slot to an ordered chain, so a later stage editing a shared bound file cannot permanently disable the audit tool",
+      "require each amendment to attest the artifacts that existed when it was issued",
+      "record the amendment chain in the candidate freeze record"
+    ],
+    "unchanged": [
+      "document selection and roles",
+      "confirmatory reserve lock",
+      "canonical OCR bytes",
+      "site rows, columns, order, and parquet bytes",
+      "candidate rows, columns, order, and parquet bytes",
+      "CGV3 discovery rules and implementation",
+      "TRAIN-only held-out-engine resources",
+      "generator ladder, union order, K=4 cap, and candidate-id rule",
+      "GT-blindness policy",
+      "every recorded count, hash, and metric"
+    ]
+  },
+  "site_freeze_path": "results/generated/sgv1/dev_candidates/site_freeze.json",
+  "site_freeze_sha256": "a570c42ac698019148f24b8f80f60f93acac9e6167325bc5dcd73da964b71eb9",
+  "site_table_path": "results/generated/sgv1/dev_candidates/sites_pre_gt.parquet",
+  "site_table_sha256": "e29ab97c96445daeda197c2126c5afd1e387d60e474a1057489b87f1a4514f1c",
+  "status": "SCOPED_IMPLEMENTATION_AMENDMENT",
+  "trigger": "Independent reviewer B found that every verb of scripts/sgv1_development_candidates.py, --audit included, had been failing closed since commit f997905: src/ocr_risk/experiments/sgv1_frames.py is one of the ten files bound by the candidate plan, and the GT-labeling stage edited it after the candidate freeze. The single-slot amendment mechanism could not record a second, post-freeze change, so the freeze's own audit tool became permanently unrunnable. No test covered validate_plan() against the committed plan, so the regression shipped silently."
+}

@@ -1,0 +1,57 @@
+# Real-corpus validation: FUNSD forms read by real Tesseract.
+#
+# Purpose: exercise the geometry-aware alignment path against genuine human annotations
+# and genuine engine output, neither of which our generators produce. Synthetic pages
+# have clean, axis-aligned, machine-placed boxes; FUNSD has scanned forms with real
+# skew, real noise, and annotation conventions we did not choose.
+#
+# NOT part of CI (needs the tesseract binary and a downloaded corpus) and not a research
+# result: it validates the ingestion and alignment path, nothing more.
+#
+#   uv run python scripts/download_funsd.py
+#   ocr-risk data manifest       configs/experiments/funsd_check.yaml
+#   ocr-risk ocr run             configs/experiments/funsd_check.yaml
+#   ocr-risk ocr canonicalize    configs/experiments/funsd_check.yaml
+#   ocr-risk align run           configs/experiments/funsd_check.yaml
+#   ocr-risk sites baseline      configs/experiments/funsd_check.yaml
+
+extends:
+  - ../base.yaml
+  - ../candidates/default.yaml
+  - ../verifiers/ablation_all.yaml
+
+name: funsd_check
+description: >-
+  Real Tesseract over real FUNSD forms, to validate ingestion and geometry-aware
+  alignment against human annotations.
+synthetic: false
+
+datasets:
+  - id: funsd
+    enabled: true
+    max_documents: 40
+    params:
+      split: training_data
+
+engines:
+  - id: tesseract
+    adapter: tesseract
+    params:
+      lang: eng
+      # psm 6 (assume a uniform block of text) suits scanned forms better than the
+      # fully-automatic default, which over-segments dense form layouts.
+      psm: 6
+      oem: 3
+  - id: tesseract_psm3
+    adapter: tesseract
+    params:
+      lang: eng
+      psm: 3
+      oem: 3
+
+alignment:
+  use_geometry: true
+  # Scanned forms are skewed and the annotation boxes are hand-drawn, so anchoring must
+  # tolerate looser geometric agreement than machine-rendered pages need.
+  max_anchor_cost: 0.92
+  min_align_confidence: 0.50

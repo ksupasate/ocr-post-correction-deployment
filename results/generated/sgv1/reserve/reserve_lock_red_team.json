@@ -1,0 +1,39 @@
+{
+  "all_required_violations_blocked": true,
+  "attempts": [
+    {
+      "attempt": "reserve_id_to_development_ocr",
+      "expected_exception": "ReserveAccessError",
+      "expected_failure_observed": true,
+      "message": "SGV1 development OCR: 1 CONFIRMATORY reserve document(s) selected (cord-train-0028). Images, annotations, OCR, candidates, crops, and verifier scores remain locked until the final SGV1 freeze and unlock.",
+      "observed_exception": "ReserveAccessError"
+    },
+    {
+      "attempt": "reserve_annotation_to_candidate_generation",
+      "expected_exception": "ReserveAccessError",
+      "expected_failure_observed": true,
+      "message": "SGV1 candidate annotation load: 1 CONFIRMATORY reserve document(s) selected (cord-train-0028). Images, annotations, OCR, candidates, crops, and verifier scores remain locked until the final SGV1 freeze and unlock.",
+      "observed_exception": "ReserveAccessError"
+    },
+    {
+      "attempt": "reserve_image_to_track_a",
+      "expected_exception": "ReserveAccessError",
+      "expected_failure_observed": true,
+      "message": "SGV1 Track-A source-image load: 1 CONFIRMATORY reserve document(s) selected (cord-train-0028). Images, annotations, OCR, candidates, crops, and verifier scores remain locked until the final SGV1 freeze and unlock.",
+      "observed_exception": "ReserveAccessError"
+    },
+    {
+      "attempt": "duplicate_sibling_cross_role",
+      "expected_exception": "RoleManifestError",
+      "expected_failure_observed": true,
+      "message": "duplicate group ['cord-train-0015', 'cord-validation-0035'] crosses SGV1 roles ['CALIBRATION', 'TRAIN']; document-level leakage is forbidden",
+      "observed_exception": "RoleManifestError"
+    }
+  ],
+  "issued_utc": "2026-08-30T12:38:47Z",
+  "pre_access_snapshot_sha256": "4eb1d26283e7d331f5a971b435ad3d8deafda020f77788a51dddd4e2809cce39",
+  "reserve_lock_sha256": "c17ada0a97d257853f25f496a872643ab9868ca31a0138874642f457af67463f",
+  "role_manifest_sha256": "69fb2b047d6c87222bb78659777eb2f42948a6c12197fb4159eb280ae5686ff2",
+  "schema_version": "sgv1-reserve-red-team-v1",
+  "scientific_scope": "identifier-only red team; no reserve content resolved or read"
+}

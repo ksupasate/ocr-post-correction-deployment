@@ -1,0 +1,70 @@
+# Dataset licence registry.
+#
+# `ocr-risk audit licenses` fails if a corpus whose redistribution is not `allowed` has
+# files tracked in this repository. Benchmark images and annotations are never committed;
+# what ships is the download script, the checksum, the adapter, and this record.
+#
+# `unclear` is treated as prohibited. "We could not determine the terms" and "the terms
+# forbid it" are different statements, and recording which one applies matters.
+
+datasets:
+  synthetic:
+    license_id: synthetic-generated
+    name: Generated in-repository; no third-party rights
+    url: ""
+    redistribution: allowed
+    attribution_required: false
+    notes: >-
+      Rendered locally by ocr_risk.datasets.synthetic from a seed. Not a real corpus and
+      not a research artifact.
+
+  funsd:
+    license_id: funsd-research-use
+    name: FUNSD (Form Understanding in Noisy Scanned Documents)
+    url: https://guillaumejaume.github.io/FUNSD/
+    redistribution: prohibited
+    attribution_required: true
+    notes: >-
+      Derived from the RVL-CDIP / IIT-CDIP tobacco litigation corpus and distributed for
+      research use. Images and annotations are NOT redistributed here; the download
+      script fetches them and verifies a checksum. Ground truth is word-level annotation
+      rather than a diplomatic transcription, which is recorded per document as
+      gt_policy=funsd_word_annotation.
+
+  cord:
+    license_id: CC-BY-4.0
+    name: CORD (Consolidated Receipt Dataset), public subset
+    url: https://github.com/clovaai/cord
+    redistribution: allowed
+    attribution_required: true
+    notes: >-
+      CC BY 4.0 on the public release. Still not vendored: a download script keeps the
+      provenance chain to the upstream release explicit.
+
+  ocrd_sbb:
+    license_id: CC-BY-SA-4.0
+    name: OCR-D ground truth, historical German prints (gt_structure_text)
+    url: https://github.com/OCR-D/gt_structure_text
+    redistribution: allowed
+    attribution_required: true
+    share_alike: true
+    notes: >-
+      CC-BY-SA-4.0, read from the GitHub repository metadata on 2026-08-18
+      (license.spdx_id). This replaces an earlier `unclear-per-volume` placeholder: the
+      terms were resolvable by reading, and "we could not determine" should not outlive
+      the attempt to determine. The corpus aggregates works from several holding
+      libraries, so a publication should still confirm terms per volume. Nothing is
+      redistributed from this repository in any case. German Fraktur, so Tesseract needs
+      deu/frk traineddata; a stock macOS install ships only eng/osd/snum.
+
+  gt4histocr:
+    license_id: CC-BY-4.0
+    name: GT4HistOCR
+    url: https://zenodo.org/record/1344132
+    redistribution: allowed
+    attribution_required: true
+    notes: >-
+      Deliberately EXCLUDED from the headline benchmark. Its transcription policy differs
+      from the other tracks, and merging corpora with different policies would make
+      cross-corpus numbers incomparable. Candidate for verifier training or as a
+      challenge set, labelled as such.

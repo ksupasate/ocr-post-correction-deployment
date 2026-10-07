@@ -1,0 +1,46 @@
+# Candidate generation.
+#
+# Candidate generation is a BASELINE subsystem, not the proposed mechanism. It exists so
+# the verifier has proposed edits to judge; the research question is about the judging.
+#
+# Generators are ground-truth-blind by construction and must remain so.
+
+candidates:
+  max_candidates_per_site: 8
+  drop_identity_candidates: true
+  generators:
+    - id: identity
+      kind: identity
+      enabled: true
+      max_candidates: 1
+      # Emits O -> O. Filtered from the scored pool by drop_identity_candidates, but
+      # retained as an explicit reference point for the no-correction baseline.
+
+    - id: lexical
+      kind: lexical
+      enabled: true
+      max_candidates: 4
+      params:
+        # Lexicon is built inside the fit split only; building it over all documents
+        # would leak test-document vocabulary into the generator (leakage vector L5).
+        max_edit_distance: 2
+        min_lexicon_frequency: 2
+        use_confusable_costs: true
+
+    - id: hard_negative
+      kind: hard_negative
+      enabled: true
+      max_candidates: 4
+      params:
+        # Adversarial candidates that are linguistically plausible but NOT supported by
+        # the source pixels. This is the discrimination the source-grounded verifier is
+        # hypothesized to make and a text-only verifier is hypothesized to miss.
+        families:
+          - numeric_magnitude    # 0.015 -> 0.15
+          - unit_substitution    # mg -> ng, ug
+          - homoglyph            # Al -> A1, l -> 1
+          - plausible_lexical    # Smith -> Smyth
+          - truncation           # Ti-6Al-4V -> Ti-6Al-V
+        # Generated only from fit-split documents when used for training; test-document
+        # hard negatives are a separately tagged challenge set (leakage vector L6).
+        max_per_family: 1

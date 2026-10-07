@@ -1,0 +1,40 @@
+{
+  "dataset_id": "funsd",
+  "name": "FUNSD: Form Understanding in Noisy Scanned Documents",
+  "track": "modern forms",
+  "homepage": "https://guillaumejaume.github.io/FUNSD/",
+  "citation": {
+    "note": "Cite the FUNSD paper as given on the project homepage. Not reproduced here because the DOI and author list have not been verified in this session.",
+    "verified": false
+  },
+  "license": {
+    "id": "funsd-research-use",
+    "redistribution": "prohibited",
+    "attribution_required": true,
+    "notes": "Derived from the RVL-CDIP / IIT-CDIP tobacco litigation corpus and distributed for research use. This repository ships the download script and the checksum, never the data."
+  },
+  "archive": {
+    "url": "https://guillaumejaume.github.io/FUNSD/dataset.zip",
+    "filename": "dataset.zip",
+    "sha256": "c31735649e4f441bcbb4fd0f379574f7520b42286e80b01d80b445649d54761f",
+    "sha256_note": "Recorded from a download performed on 2026-08-17 from the official host. Verify with: uv run python scripts/download_funsd.py --verify-checksums"
+  },
+  "layout": {
+    "annotations": "dataset/{split}/annotations/*.json",
+    "images": "dataset/{split}/images/*.png",
+    "splits": [
+      "training_data",
+      "testing_data"
+    ]
+  },
+  "ground_truth": {
+    "policy": "funsd_word_annotation",
+    "granularity": "word",
+    "has_geometry": true,
+    "notes": "Form annotation rather than a diplomatic transcription. Corpora with different transcription policies must not be merged into one benchmark track without saying so."
+  },
+  "expected": {
+    "training_data_documents": 149,
+    "testing_data_documents": 50
+  }
+}

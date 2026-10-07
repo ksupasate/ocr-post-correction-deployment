@@ -1,0 +1,28 @@
+# Synthetic document corpus for architecture validation.
+#
+# Rendered locally from a deterministic generator, so it needs no download and carries no
+# license constraints. Its content deliberately includes the span types where harmful
+# edits are consequential: doses with units, prices, part numbers, dates, and names.
+#
+# SYNTHETIC. Nothing measured on this corpus is a research result.
+
+datasets:
+  - id: synthetic
+    enabled: true
+    params:
+      n_documents: 48
+      seed: 20260817
+      page_width: 900
+      page_height: 560
+      lines_per_page: [8, 14]
+      # Mix of content families, so the benchmark exercises more than prose.
+      content_families:
+        - prose
+        - dosage
+        - price
+        - part_number
+        - date
+        - person_name
+      # Rendering variation gives the image-evidence channel something real to read.
+      font_sizes: [16, 18, 20]
+      noise_levels: [clean, light, moderate]

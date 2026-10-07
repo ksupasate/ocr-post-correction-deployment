@@ -1,0 +1,408 @@
+{
+  "dataset_id": "ocrd_sbb",
+  "name": "OCR-D ground truth, historical German prints (gt_structure_text)",
+  "track": "historical print",
+  "homepage": "https://github.com/OCR-D/gt_structure_text",
+  "citation": {
+    "note": "Cite the OCR-D ground-truth corpus as given on the repository. Not reproduced here because the DOI and author list have not been verified in this session.",
+    "verified": false
+  },
+  "license": {
+    "id": "CC-BY-SA-4.0",
+    "redistribution": "allowed",
+    "attribution_required": true,
+    "share_alike": true,
+    "notes": "Read from the GitHub repository metadata for OCR-D/gt_structure_text on 2026-08-18 (license.spdx_id = CC-BY-SA-4.0), replacing the earlier 'unclear-per-volume' placeholder. The corpus aggregates works from several holding libraries, so a publication should still confirm terms per volume; nothing is redistributed here in any case."
+  },
+  "source": {
+    "kind": "github_release",
+    "repo": "OCR-D/gt_structure_text",
+    "release_tag": "v1.5.0",
+    "release_note": "Per-volume OCR-D BagIt zips. Each ships the same PAGE-XML under up to three fileGrp directories; the adapter reads the most granular one only.",
+    "survey_note": "67 of the release's 68 volume archives were surveyed on 2026-08-18; witzstat_buchszbaum_1540.ocrd.zip failed to download. It sorts after the selection cutoff (laube_europa0202_1837), so the selection is unaffected -- recorded rather than omitted, because a reader re-running the rule over all 68 must get the same set."
+  },
+  "selection": {
+    "rule": "volumes sorted by identifier, taking whole volumes until the page budget is reached",
+    "page_budget": 100,
+    "unit": "whole volume",
+    "rationale": "Pages of one book share a typeface, a scan session and a binding. Splitting a volume across fit and evaluate would put the same printing on both sides of the document partition, which the image-hash duplicate check cannot see because the pages are genuinely different pages.",
+    "fixed_before_results": true
+  },
+  "recognition": {
+    "language": "deu",
+    "script": "mixed Fraktur and Antiqua",
+    "required_tesseract_languages": [
+      "deu",
+      "frk"
+    ],
+    "notes": "Recognizing German Fraktur with an English model produces plausible-looking garbage. The download script fails loudly when the language data is absent."
+  },
+  "ground_truth": {
+    "policy": "ocrd_diplomatic_line",
+    "granularity": "line",
+    "has_geometry": true,
+    "notes": "Diplomatic line transcription preserving historical orthography (long s and similar). A different convention from FUNSD form annotation and CORD receipt annotation; the three tracks are reported separately."
+  },
+  "volumes": [
+    {
+      "volume_id": "aepinus_bekentnis_1548",
+      "filename": "aepinus_bekentnis_1548.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/aepinus_bekentnis_1548.ocrd.zip",
+      "sha256": "60ee1de4420fa6a8fc8393e8189909bee61b0d34fd408548cc6570e6391d9ac2",
+      "size_bytes": 39094472,
+      "usable_pages": 4,
+      "gt_lines": 101,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "alberti_pictura_1540",
+      "filename": "alberti_pictura_1540.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/alberti_pictura_1540.ocrd.zip",
+      "sha256": "c32bdbfcc56ab97d7a8e6008c03af30f12a24bdf5c2df3846f2378c9a1d0237f",
+      "size_bytes": 15219172,
+      "usable_pages": 3,
+      "gt_lines": 94,
+      "language": "lat",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "arnimb_goethe03_1835",
+      "filename": "arnimb_goethe03_1835.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/arnimb_goethe03_1835.ocrd.zip",
+      "sha256": "b3240027a0c85c2bdab26ada7c7c0373819d3ad76c66030aa982a6c8f8503a06",
+      "size_bytes": 8769564,
+      "usable_pages": 1,
+      "gt_lines": 22,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "arnold_ketzerhistorie01_1699",
+      "filename": "arnold_ketzerhistorie01_1699.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/arnold_ketzerhistorie01_1699.ocrd.zip",
+      "sha256": "643b474ce96b0ff77f4018a36900458cce842e85c503ef20b8ba321eda69c6fe",
+      "size_bytes": 66186151,
+      "usable_pages": 4,
+      "gt_lines": 378,
+      "language": "ger",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "aventinus_grammatica_1515",
+      "filename": "aventinus_grammatica_1515.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/aventinus_grammatica_1515.ocrd.zip",
+      "sha256": "e8963016b5fbb5bd6c5af1b978e52699d0fc6934934cb122a9409a8a1bbccdb0",
+      "size_bytes": 30609264,
+      "usable_pages": 3,
+      "gt_lines": 129,
+      "language": "lat",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "ballenstedt_delatio_1777",
+      "filename": "ballenstedt_delatio_1777.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/ballenstedt_delatio_1777.ocrd.zip",
+      "sha256": "060b459a78642270a4eb1e569941bcfa522ca39d4cc5d6d6f5d8a027edf39e2d",
+      "size_bytes": 32160994,
+      "usable_pages": 3,
+      "gt_lines": 98,
+      "language": "lat",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "basilius_legendi_1515",
+      "filename": "basilius_legendi_1515.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/basilius_legendi_1515.ocrd.zip",
+      "sha256": "0fab3d9e11c183856dc3092f463fb433a2880a93895983967a3da7dfe6ae1a00",
+      "size_bytes": 29038433,
+      "usable_pages": 3,
+      "gt_lines": 81,
+      "language": "lat",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "bebel_frau_1879",
+      "filename": "bebel_frau_1879.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/bebel_frau_1879.ocrd.zip",
+      "sha256": "e21a7bb108fce3a13835d31003aafc6de3a8cd88face37dafbe66ddd91dafde2",
+      "size_bytes": 1334647,
+      "usable_pages": 4,
+      "gt_lines": 164,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "benner_herrnhuterey04_1748",
+      "filename": "benner_herrnhuterey04_1748.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/benner_herrnhuterey04_1748.ocrd.zip",
+      "sha256": "18b6cf000bd08524b057bc3bcc9435406ac005b4bafc4264d24a1dc7e447f4db",
+      "size_bytes": 32214570,
+      "usable_pages": 4,
+      "gt_lines": 144,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "bernd_lebensbeschreibung_1738",
+      "filename": "bernd_lebensbeschreibung_1738.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/bernd_lebensbeschreibung_1738.ocrd.zip",
+      "sha256": "f4a8f7f60f4081835bff4f0db42774296642b19df8a3868209ab29f7fd076440",
+      "size_bytes": 12721645,
+      "usable_pages": 3,
+      "gt_lines": 71,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "blumenbach_anatomie_1805",
+      "filename": "blumenbach_anatomie_1805.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/blumenbach_anatomie_1805.ocrd.zip",
+      "sha256": "4b371d6f658ade5d9fe628662c72b11638d477d032b760428262e1ed9a256715",
+      "size_bytes": 35378133,
+      "usable_pages": 3,
+      "gt_lines": 84,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "boeschenstain_gedicht_1520",
+      "filename": "boeschenstain_gedicht_1520.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/boeschenstain_gedicht_1520.ocrd.zip",
+      "sha256": "d62dc1d22527b7fde823b2ce4eebddb125ccc4125ce313f619878cc63f04927b",
+      "size_bytes": 18531484,
+      "usable_pages": 1,
+      "gt_lines": 45,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "bohse_helicon_1696",
+      "filename": "bohse_helicon_1696.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/bohse_helicon_1696.ocrd.zip",
+      "sha256": "309d8fab186338a8811bed51dfbadee5ffa34c735d19f666d857e219e9a5535d",
+      "size_bytes": 24861297,
+      "usable_pages": 5,
+      "gt_lines": 121,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "brenz_abentmal_1550",
+      "filename": "brenz_abentmal_1550.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/brenz_abentmal_1550.ocrd.zip",
+      "sha256": "6e8d378208a748b69866a242077416b2cc68c5052064de518af833afe1daebe4",
+      "size_bytes": 21430689,
+      "usable_pages": 4,
+      "gt_lines": 87,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "buerger_gedichte_1778",
+      "filename": "buerger_gedichte_1778.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/buerger_gedichte_1778.ocrd.zip",
+      "sha256": "a5039cec117debead18e725cefe2113e85dd1576efff0c0ce87220f031b99a22",
+      "size_bytes": 13059898,
+      "usable_pages": 2,
+      "gt_lines": 52,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "calvi_beutelschneider01_1627",
+      "filename": "calvi_beutelschneider01_1627.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/calvi_beutelschneider01_1627.ocrd.zip",
+      "sha256": "67be915db2af5f1c264d25d205c1d876095012b1ad03ce21a22066170d226cda",
+      "size_bytes": 9323687,
+      "usable_pages": 3,
+      "gt_lines": 87,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "clauren_mimil_1815",
+      "filename": "clauren_mimil_1815.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/clauren_mimil_1815.ocrd.zip",
+      "sha256": "500bad17b7a775e9e1e92ff3c32bc2bfe0b63d8467a1c83a9b4dd948c753918a",
+      "size_bytes": 3799582,
+      "usable_pages": 9,
+      "gt_lines": 206,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-BLOCK"
+    },
+    {
+      "volume_id": "dannhauer_catechismus10_1673",
+      "filename": "dannhauer_catechismus10_1673.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/dannhauer_catechismus10_1673.ocrd.zip",
+      "sha256": "644c2e312859ad4375a91d20a0262c84135a2ef2492c0575fa600ede7603405d",
+      "size_bytes": 57454133,
+      "usable_pages": 4,
+      "gt_lines": 151,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "estor_rechtsgelehrsamkeit02_1758",
+      "filename": "estor_rechtsgelehrsamkeit02_1758.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/estor_rechtsgelehrsamkeit02_1758.ocrd.zip",
+      "sha256": "6f2a98b52c94ec61f9c5eb785397675eb04d7450f36cb5026a1be666684644bc",
+      "size_bytes": 35530592,
+      "usable_pages": 4,
+      "gt_lines": 153,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "euler_rechenkunst01_1738",
+      "filename": "euler_rechenkunst01_1738.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/euler_rechenkunst01_1738.ocrd.zip",
+      "sha256": "32f909d1ed0d003ef70e6c853e49bdffe495351ccf4891d53fd65408766da0cb",
+      "size_bytes": 18413007,
+      "usable_pages": 6,
+      "gt_lines": 232,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "gerstner_mechaniktafeln01_1831",
+      "filename": "gerstner_mechaniktafeln01_1831.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/gerstner_mechaniktafeln01_1831.ocrd.zip",
+      "sha256": "3c16270b0cc9c6fce28fa72dbdf7cf46578761f9488ca7a24fde56929b60012d",
+      "size_bytes": 2784294,
+      "usable_pages": 1,
+      "gt_lines": 2,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-BLOCK"
+    },
+    {
+      "volume_id": "glauber_opera01_1658",
+      "filename": "glauber_opera01_1658.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/glauber_opera01_1658.ocrd.zip",
+      "sha256": "ce4cdddfc9b82e9f70687aa5942d00773053e938570b46b8e8b7b14a45e526e6",
+      "size_bytes": 59263279,
+      "usable_pages": 6,
+      "gt_lines": 376,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "herder_geschichte03_1787",
+      "filename": "herder_geschichte03_1787.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/herder_geschichte03_1787.ocrd.zip",
+      "sha256": "fbe06b71c3d2129a26536070bd759ff02dbf2de9fc40e40b7a069a25f4126cb7",
+      "size_bytes": 539234,
+      "usable_pages": 1,
+      "gt_lines": 14,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-BLOCK"
+    },
+    {
+      "volume_id": "heyden_paedono_1548",
+      "filename": "heyden_paedono_1548.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/heyden_paedono_1548.ocrd.zip",
+      "sha256": "b6199e4be5375c970809dabb3fd014165810cfe124765fb6b07d31041c32af62",
+      "size_bytes": 16663190,
+      "usable_pages": 3,
+      "gt_lines": 72,
+      "language": "lat",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "hohberg_georgica01_1682_teil1",
+      "filename": "hohberg_georgica01_1682_teil1.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/hohberg_georgica01_1682_teil1.ocrd.zip",
+      "sha256": "271b1a626cb69b99a57aa9f5340b32c26a870ab1c74627b09537c9c34de44149",
+      "size_bytes": 57415241,
+      "usable_pages": 2,
+      "gt_lines": 64,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "hohberg_georgica01_1682_teil2",
+      "filename": "hohberg_georgica01_1682_teil2.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/hohberg_georgica01_1682_teil2.ocrd.zip",
+      "sha256": "241303245c1d6cc5dcd0c04e61a0c1dad9a0cd79f35aa7e0146204405bec5909",
+      "size_bytes": 58008230,
+      "usable_pages": 2,
+      "gt_lines": 157,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "huebner_handbuch_1696",
+      "filename": "huebner_handbuch_1696.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/huebner_handbuch_1696.ocrd.zip",
+      "sha256": "986e52d8786f31812ee22f64f57360784e6a26197392bd957e8aa22e93f7e21b",
+      "size_bytes": 30299708,
+      "usable_pages": 3,
+      "gt_lines": 78,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "justi_abhandlung01_1758",
+      "filename": "justi_abhandlung01_1758.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/justi_abhandlung01_1758.ocrd.zip",
+      "sha256": "ef77f8ac1faf132d93e9c0ddca29d0d5c83ad223d0766b94c01f91077be26395",
+      "size_bytes": 36711332,
+      "usable_pages": 4,
+      "gt_lines": 131,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "karlstadt_sermon_1523",
+      "filename": "karlstadt_sermon_1523.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/karlstadt_sermon_1523.ocrd.zip",
+      "sha256": "a069386278aff4b84cfcdc239b7619ebd302aa91b9fcda691461fc20d82a9282",
+      "size_bytes": 21291607,
+      "usable_pages": 2,
+      "gt_lines": 65,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "kistler_kraeuter_1500",
+      "filename": "kistler_kraeuter_1500.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/kistler_kraeuter_1500.ocrd.zip",
+      "sha256": "30fa723977a30c61795b0bc24943341e330e5753874cee99415b32bf890a3517",
+      "size_bytes": 19394497,
+      "usable_pages": 2,
+      "gt_lines": 58,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-LINE"
+    },
+    {
+      "volume_id": "laube_europa0202_1837",
+      "filename": "laube_europa0202_1837.ocrd.zip",
+      "url": "https://github.com/OCR-D/gt_structure_text/releases/download/v1.5.0/laube_europa0202_1837.ocrd.zip",
+      "sha256": "0ee460e6cc69d9499006bb481c7481f317b4d7c6a397b4d117f46933c861bfb4",
+      "size_bytes": 574694,
+      "usable_pages": 3,
+      "gt_lines": 43,
+      "language": "deu",
+      "gt_file_group": "OCR-D-GT-SEG-BLOCK"
+    }
+  ],
+  "excluded_volumes": [
+    {
+      "volume_id": "hilbert_zahlkoerper_1897",
+      "reason": "no PAGE-XML page with both an image and non-empty TextLine text"
+    },
+    {
+      "volume_id": "ruempler_gartenbau_1882",
+      "reason": "no PAGE-XML page with both an image and non-empty TextLine text"
+    },
+    {
+      "volume_id": "vischer_aesthetikregister_1858",
+      "reason": "no PAGE-XML page with both an image and non-empty TextLine text"
+    }
+  ],
+  "expected": {
+    "volumes": 31,
+    "usable_pages": 102
+  },
+  "sha256_note": "Every digest recorded from a download performed on 2026-08-18 from the pinned release tag. Verify with: uv run python scripts/download_ocrd_sbb.py --verify-checksums"
+}

@@ -1,0 +1,142 @@
+{
+  "dataset_id": "cord",
+  "name": "CORD: Consolidated Receipt Dataset (v2 public release)",
+  "track": "modern receipts",
+  "homepage": "https://github.com/clovaai/cord",
+  "citation": {
+    "note": "Cite the CORD paper as given on the project homepage. Not reproduced here because the DOI and author list have not been verified in this session.",
+    "verified": false
+  },
+  "license": {
+    "id": "CC-BY-4.0",
+    "redistribution": "allowed",
+    "attribution_required": true,
+    "source_url": "https://github.com/clovaai/cord/blob/master/LICENSE-CC-BY",
+    "source_sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661",
+    "verified_utc": "2026-08-29T17:03:31Z",
+    "permitted_research_use": true,
+    "redistribution_constraints": "Redistribution and adapted material are permitted with attribution, a licence notice/link, and an indication of modifications; no additional downstream restrictions may be imposed.",
+    "raw_image_policy": "The licence permits use and redistribution, but repository policy prohibits committing dataset images; raw images remain ignored under data/raw/source/cord.",
+    "annotation_policy": "The licence permits use and redistribution, but repository policy prohibits committing raw annotations or per-example ground-truth text.",
+    "derivative_artifact_policy": "Aggregate statistics, document identifiers, hashes, manifests, and model-independent audit records may be retained; artifacts reproducing raw images or annotations remain untracked.",
+    "notes": "Read from the authoritative CORD repository licence and the official naver-clova-ix/cord-v2 dataset card. The retrieved licence text hash above binds the exact source read; the Hugging Face dataset card and repository metadata both declare cc-by-4.0."
+  },
+  "source": {
+    "kind": "huggingface_parquet",
+    "repo_id": "naver-clova-ix/cord-v2",
+    "dataset_release": "CORD v2 public 1,000-document release",
+    "publisher": "NAVER CLOVA Information Extraction",
+    "revision": "7f0115a4b758a71d6473b8d085751692da2fef98",
+    "revision_note": "Repository commit sha read from https://huggingface.co/api/datasets/naver-clova-ix/cord-v2 on 2026-08-18. Pinned so a later upstream edit cannot change the corpus under a frozen manifest. Re-read at 2026-08-29T17:03:31Z: the pinned revision remained the repository head; all six parquet checksums below come from the tree API at this exact revision.",
+    "verification": {
+      "verified_utc": "2026-08-29T17:03:31Z",
+      "repository_api": "https://huggingface.co/api/datasets/naver-clova-ix/cord-v2",
+      "observed_head_revision": "7f0115a4b758a71d6473b8d085751692da2fef98",
+      "observed_card_license": "cc-by-4.0",
+      "tree_api": "https://huggingface.co/api/datasets/naver-clova-ix/cord-v2/tree/7f0115a4b758a71d6473b8d085751692da2fef98/data",
+      "size_api": "https://datasets-server.huggingface.co/size?dataset=naver-clova-ix%2Fcord-v2",
+      "source_verification_status": "upstream_metadata_verified"
+    }
+  },
+  "archives": [
+    {
+      "url": "https://huggingface.co/datasets/naver-clova-ix/cord-v2/resolve/7f0115a4b758a71d6473b8d085751692da2fef98/data/test-00000-of-00001-9c204eb3f4e11791.parquet",
+      "filename": "cord-v2-test-00000-of-00001.parquet",
+      "split": "test",
+      "shard": "00000-of-00001",
+      "sha256": "51c65f1788faff392abe2a0b55b023eb23e9be551c509138eaa3a832514224e7",
+      "checksum_kind": "upstream_verified_checksum",
+      "size_bytes": 234202795,
+      "retrieved_utc": "2026-08-18",
+      "sha256_note": "Recorded from a download performed on 2026-08-18 from the pinned revision above. Independently confirmed on 2026-08-29 to equal the upstream LFS oid exposed by the repository tree API for this path, so the locally-recorded digest and the upstream-declared digest agree."
+    },
+    {
+      "url": "https://huggingface.co/datasets/naver-clova-ix/cord-v2/resolve/7f0115a4b758a71d6473b8d085751692da2fef98/data/train-00000-of-00004-b4aaeceff1d90ecb.parquet",
+      "filename": "cord-v2-train-00000-of-00004.parquet",
+      "split": "train",
+      "shard": "00000-of-00004",
+      "sha256": "da3994eee1bf9bd3c57f0d53a72c3a6812c8696c5ba26245987949ddf73483cc",
+      "checksum_kind": "upstream_verified_checksum",
+      "size_bytes": 490224630,
+      "pinned_utc": "2026-08-29",
+      "sha256_note": "Pinned BEFORE any download of this file: the digest is the upstream LFS oid read from the repository tree API at the pinned revision (no data bytes fetched). The download verifies the fetched file against this upstream checksum."
+    },
+    {
+      "url": "https://huggingface.co/datasets/naver-clova-ix/cord-v2/resolve/7f0115a4b758a71d6473b8d085751692da2fef98/data/train-00001-of-00004-7dbbe248962764c5.parquet",
+      "filename": "cord-v2-train-00001-of-00004.parquet",
+      "split": "train",
+      "shard": "00001-of-00004",
+      "sha256": "cce4def16a0d6a6c75f80be712f7494c56c318a8829b712f5c62650155c9e58e",
+      "checksum_kind": "upstream_verified_checksum",
+      "size_bytes": 441418432,
+      "pinned_utc": "2026-08-29",
+      "sha256_note": "Pinned BEFORE any download of this file: the digest is the upstream LFS oid read from the repository tree API at the pinned revision (no data bytes fetched). The download verifies the fetched file against this upstream checksum."
+    },
+    {
+      "url": "https://huggingface.co/datasets/naver-clova-ix/cord-v2/resolve/7f0115a4b758a71d6473b8d085751692da2fef98/data/train-00002-of-00004-688fe1305a55e5cc.parquet",
+      "filename": "cord-v2-train-00002-of-00004.parquet",
+      "split": "train",
+      "shard": "00002-of-00004",
+      "sha256": "591e2db8fe8b1d364b054f46e8c375b7f00e72578914ba46a573b6858162cab2",
+      "checksum_kind": "upstream_verified_checksum",
+      "size_bytes": 443802181,
+      "pinned_utc": "2026-08-29",
+      "sha256_note": "Pinned BEFORE any download of this file: the digest is the upstream LFS oid read from the repository tree API at the pinned revision (no data bytes fetched). The download verifies the fetched file against this upstream checksum."
+    },
+    {
+      "url": "https://huggingface.co/datasets/naver-clova-ix/cord-v2/resolve/7f0115a4b758a71d6473b8d085751692da2fef98/data/train-00003-of-00004-2d0cd200555ed7fd.parquet",
+      "filename": "cord-v2-train-00003-of-00004.parquet",
+      "split": "train",
+      "shard": "00003-of-00004",
+      "sha256": "1ffd9de8d6fbcee7630fd4cdfedff05b9b7fabc0fae4fc17557c5fe7cf178748",
+      "checksum_kind": "upstream_verified_checksum",
+      "size_bytes": 455555434,
+      "pinned_utc": "2026-08-29",
+      "sha256_note": "Pinned BEFORE any download of this file: the digest is the upstream LFS oid read from the repository tree API at the pinned revision (no data bytes fetched). The download verifies the fetched file against this upstream checksum."
+    },
+    {
+      "url": "https://huggingface.co/datasets/naver-clova-ix/cord-v2/resolve/7f0115a4b758a71d6473b8d085751692da2fef98/data/validation-00000-of-00001-cc3c5779fe22e8ca.parquet",
+      "filename": "cord-v2-validation-00000-of-00001.parquet",
+      "split": "validation",
+      "shard": "00000-of-00001",
+      "sha256": "0d0f6dac11fdcc549de2746aa9f53136a3bc22a2a1aff2b0b847f7622ad60c15",
+      "checksum_kind": "upstream_verified_checksum",
+      "size_bytes": 242080800,
+      "pinned_utc": "2026-08-29",
+      "sha256_note": "Pinned BEFORE any download of this file: the digest is the upstream LFS oid read from the repository tree API at the pinned revision (no data bytes fetched). The download verifies the fetched file against this upstream checksum."
+    }
+  ],
+  "amendment": {
+    "amended_utc": "2026-08-29",
+    "purpose": "SGV1 session 2, blocking condition C1: admit the upstream train/validation splits as the fresh-corpus pool. The amendment pins every parquet checksum BEFORE download, per the hard gate in docs/sgv1/corpus_qualification_design.md section 3.",
+    "checksum_source": {
+      "tree_api": "https://huggingface.co/api/datasets/naver-clova-ix/cord-v2/tree/7f0115a4b758a71d6473b8d085751692da2fef98/data",
+      "read_utc": "2026-08-29",
+      "kind": "upstream LFS oid (sha256) from the pinned revision's tree listing; no data file was fetched to obtain any digest",
+      "cross_check": {
+        "size_api": "https://datasets-server.huggingface.co/size?dataset=naver-clova-ix/cord-v2",
+        "read_utc": "2026-08-29",
+        "result": "per-split summed shard sizes equal the datasets-server num_bytes_parquet_files exactly (train 490224630+441418432+443802181+455555434=1831000677; validation 242080800; test 234202795), and the datasets-server row counts (train 800, validation 100, test 100) match the expected document counts below"
+      }
+    }
+  },
+  "layout": {
+    "annotations": "<split>/json/*.json",
+    "images": "<split>/image/*.png",
+    "splits": ["test", "train", "validation"],
+    "note": "The upstream release ships parquet shards per split with an inline image column. The download script materializes them into the per-file layout the adapter reads; within a multi-shard split the document number is the cumulative row offset in filename-sorted shard order, so cord-train-0000..cord-train-0799 is deterministic given the pinned shard set."
+  },
+  "ground_truth": {
+    "policy": "cord_receipt_annotation",
+    "granularity": "word",
+    "has_geometry": true,
+    "geometry_kind": "quadrilateral",
+    "notes": "Word-level receipt annotation with four-corner quads rather than axis-aligned boxes, because receipt photographs are routinely skewed. A different transcription convention from FUNSD's form annotation and from OCR-D's diplomatic line transcription; the three tracks are reported separately."
+  },
+  "expected": {
+    "test_documents": 100,
+    "train_documents": 800,
+    "validation_documents": 100,
+    "source": "datasets-server size endpoint read 2026-08-29 (recorded in amendment.checksum_source.cross_check); the download preflight compares materialized counts against these and fails on mismatch"
+  }
+}

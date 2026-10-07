@@ -1,0 +1,30 @@
+{
+  "adapter_version": "1",
+  "dataset_id": "synthetic",
+  "document_id": "doc-0000",
+  "duration_seconds": 0.29869358300129534,
+  "engine_fingerprint": "f3c08ee8c8bf2010d23df590de4b96e694018e95420be54197f1cb8cc5fd7017",
+  "engine_id": "tesseract",
+  "host": "REDACTED_RELEASE_FIXTURE",
+  "payload": {
+    "command": [
+      "tesseract",
+      "data/raw/source/synthetic/doc-0000.png",
+      "stdout",
+      "-l",
+      "eng",
+      "--psm",
+      "3",
+      "--oem",
+      "3",
+      "tsv"
+    ],
+    "image_sha256": "53aabb37a828b8a648728ab762e809395da98d24e5de59ba78c33831e57e1fab",
+    "stderr": "Estimating resolution as 148\n",
+    "tsv": "level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n1\t1\t0\t0\t0\t0\t0\t0\t900\t560\t-1\t\n2\t1\t1\t0\t0\t0\t41\t45\t419\t314\t-1\t\n3\t1\t1\t1\t0\t0\t41\t45\t419\t74\t-1\t\n4\t1\t1\t1\t1\t0\t42\t45\t172\t11\t-1\t\n5\t1\t1\t1\t1\t1\t42\t45\t34\t11\t96.219818\tDate:\n5\t1\t1\t1\t1\t2\t83\t45\t17\t11\t96.219818\t26\n5\t1\t1\t1\t1\t3\t105\t45\t28\t11\t96.900871\tNov\n5\t1\t1\t1\t1\t4\t138\t45\t32\t11\t93.171860\t1991\n5\t1\t1\t1\t1\t5\t176\t45\t38\t11\t94.885643\t03:37\n4\t1\t1\t1\t2\t0\t41\t73\t419\t16\t-1\t\n5\t1\t1\t1\t2\t1\t41\t74\t31\t12\t91.832748\tuntil\n5\t1\t1\t1\t2\t2\t76\t74\t62\t15\t90.967033\treported\n5\t1\t1\t1\t2\t3\t143\t74\t41\t12\t90.967033\tunder\n5\t1\t1\t1\t2\t4\t188\t75\t51\t14\t93.785553\tpatient\n5\t1\t1\t1\t2\t5\t244\t73\t14\t13\t96.893326\tof\n5\t1\t1\t1\t2\t6\t263\t74\t75\t15\t96.335350\tlaboratory\n5\t1\t1\t1\t2\t7\t342\t74\t17\t15\t96.627029\tby\n5\t1\t1\t1\t2\t8\t363\t74\t75\t15\t80.287735\tlaboratory\n5\t1\t1\t1\t2\t9\t442\t77\t18\t9\t80.287735\tno\n4\t1\t1\t1\t3\t0\t42\t105\t198\t14\t-1\t\n5\t1\t1\t1\t3\t1\t42\t105\t37\t11\t92.738358\tDose:\n5\t1\t1\t1\t3\t2\t87\t105\t92\t14\t59.767677\t12.5\n5\t1\t1\t1\t3\t3\t118\t95\t16\t31\t59.767677\tIU\n5\t1\t1\t1\t3\t4\t141\t105\t37\t14\t76.689415\t25ng\n5\t1\t1\t1\t3\t5\t185\t105\t55\t11\t57.154770\t125mL\n3\t1\t1\t2\t0\t0\t42\t134\t268\t15\t-1\t\n4\t1\t1\t2\t1\t0\t42\t134\t268\t15\t-1\t\n5\t1\t1\t2\t1\t1\t42\t135\t28\t11\t93.254349\tPart:\n5\t1\t1\t2\t1\t2\t78\t134\t63\t12\t58.997574\tTi-6AL-4V\n5\t1\t1\t2\t1\t3\t146\t135\t74\t14\t87.741631\tMg-AZ31B\n5\t1\t1\t2\t1\t4\t226\t135\t84\t11\t81.576820\tREF-7906-G\n"
+  },
+  "payload_format": "tesseract_tsv_v5",
+  "payload_sha256": "25eb254a24d1ddf5bd3ad5212519ddeb92628c91580418b834a21001209c6219",
+  "platform": "REDACTED_RELEASE_FIXTURE",
+  "started_at_utc": "2026-08-16T19:41:51Z"
+}

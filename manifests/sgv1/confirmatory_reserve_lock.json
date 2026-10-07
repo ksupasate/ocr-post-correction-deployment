@@ -1,0 +1,25 @@
+{
+  "c1_certificate_path": "results/generated/sgv1/corpus_qualification/c1_cord_certificate.json",
+  "c1_certificate_sha256": "3101f57c4d45ed79bc86498fd4ad13724b6af6ee6d9eca3957b80e6eb8cdb811",
+  "forbidden_before_final_unlock": [
+    "image or annotation read",
+    "OCR",
+    "site or candidate generation",
+    "crop generation",
+    "verifier scoring",
+    "debugging or manual inspection",
+    "threshold tuning",
+    "class-count inspection"
+  ],
+  "guard": "ocr_risk.experiments.sgv1_reserve.assert_sgv1_development_access",
+  "issued_utc": "2026-08-30T12:37:43Z",
+  "pre_access_snapshot_path": "results/generated/sgv1/reserve/pre_access_freshness_snapshot.json",
+  "pre_access_snapshot_sha256": "4eb1d26283e7d331f5a971b435ad3d8deafda020f77788a51dddd4e2809cce39",
+  "reserve_count": 177,
+  "reserve_document_set_sha256": "27398e6b6e07efc3468aedd6deaff09ae67c000053701f5f2675f7510838830b",
+  "role_manifest_path": "manifests/sgv1/role_manifest.json",
+  "role_manifest_sha256": "69fb2b047d6c87222bb78659777eb2f42948a6c12197fb4159eb280ae5686ff2",
+  "schema_version": "sgv1-confirmatory-reserve-lock-v1",
+  "status": "LOCKED",
+  "unlock_record": null
+}

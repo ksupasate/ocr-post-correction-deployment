@@ -1,0 +1,71 @@
+# RH1: cross-engine DISCRIMINATION degradation, on matched arms.
+#
+# Not a rerun of H1. H1 asked about calibration reliability and its pre-registered verdict
+# was NOT SUPPORTED; that stands. RH1 asks whether transfer costs the model its ability to
+# RANK beneficial edits above harmful ones -- the direction H1's secondary endpoints
+# pointed and its design could not attribute (docs/h1_recovery/amendment4_confound.md).
+#
+# The reference arm is `matched_in_engine`, NOT `in_engine_oracle`: three fit engines
+# rather than four, the same number of harmful and safe fitting examples as the zero-shot
+# arm, and the target engine's confidence z-score ablated in BOTH arms. Every donor
+# substitution is run, so the donor's identity is marginalized rather than assumed away.
+#
+# Runs on the H1 pilot's own candidate pool, reusing its candidates artifact, so the only
+# thing that differs from H1 is the design. Endpoints and criteria are frozen in
+# docs/h1_recovery/h2_readiness_protocol.md section 4.
+#
+#   uv run ocr-risk experiment rh1 -c configs/experiments/rh1_matched.yaml \
+#       --source pilot_loeo_zero_shot
+#   uv run ocr-risk analyze rh1 --experiment rh1_matched
+
+extends:
+  - ../base.yaml
+  - ../datasets/pilot_corpora.yaml
+  - ../engines/four_real.yaml
+  - ../candidates/default.yaml
+  - ../verifiers/ablation_all.yaml
+
+name: rh1_matched
+description: >-
+  Matched-handicap leave-one-engine-out over FUNSD, CORD and OCR-D. Twelve
+  (target, donor) pairs, two arms each, on the H1 pilot's candidate pool.
+synthetic: false
+seed: 20260819
+
+splits:
+  # The same frozen partition as both H1 arms. A per-experiment partition would evaluate
+  # the conditions on different documents and call the difference transfer.
+  partition_id: h1_pilot
+  protocol: matched_in_engine
+  partition_seed: 20260818
+  fit_fraction: 0.6
+  calibrate_fraction: 0.2
+  stratify_by: [dataset_id, noise_tertile]
+  allow_document_overlap: false
+  selection_scope: fit_only
+
+risk:
+  # The resolvable grid. {0.01, 0.005, 0.001} needs 329, 659 and 3301 accepted edits at
+  # zero observed harm; the best pool here can supply 417 with a PERFECT verifier, so the
+  # tighter two were never resolvable at this sample size. See
+  # docs/h1_recovery/h2_readiness_protocol.md section 2. The pilot's grid is retained
+  # verbatim in its own artifacts and is not re-judged here.
+  epsilon_grid: [0.10, 0.05, 0.02]
+  # The PRIMARY tolerance the gate judges at. 0.05 rather than the pilot's 0.01 because
+  # 0.01 needs 329 accepted edits at zero observed harm and the best pool here supplies
+  # 417 only with a perfect verifier; 0.05 needs 65, or 245 at harm epsilon/2.
+  primary_epsilon: 0.05
+  delta: 0.1
+  controller: ltt_bentkus
+  coverage_unit: site
+  harm_policy: strict_worsening
+  sensitivity_harm_policies: [strict_worsening, non_improving, exact_only]
+  site_policy: argmax_above_tau
+  n_threshold_grid: 200
+
+stats:
+  n_bootstrap: 10000
+  ci_level: 0.95
+  bootstrap_unit: document
+  multiplicity: holm
+  bootstrap_seed: 7

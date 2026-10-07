@@ -1,0 +1,31 @@
+{
+  "amended_runner_sha256": "1c8f96503d6b756023a6514f8e50c0758717bf8b282559c98bb05f0562b9740f",
+  "base_plan_path": "manifests/sgv1/development_ocr_plan.json",
+  "base_plan_sha256": "45a7b760db49c4414bf7441ca208be14260cd26daac215ec55ab2d2d486e8d27",
+  "change": "Validate tesseract_tsv_v5 payload_sha256 against UTF-8 TSV bytes; retain canonical-JSON payload validation for PaddleOCR, EasyOCR, and docTR.",
+  "change_scope": "raw-response checksum validation only",
+  "incident_path": "results/generated/sgv1/dev_ocr/incidents/tesseract_payload_validator_interruption.json",
+  "incident_sha256": "a59356d47fdd1d82ca8327c1b5c2f399baf9f5f712fd08f6253e4a7bb9960d6d",
+  "issued_utc": "2026-08-30T12:52:14Z",
+  "previous_runner_sha256": "0e551c0bd78a2ea4cfe5d14308b8f3d32d24a828da4a0a967e78b562c853da56",
+  "resume_disposition": "reuse the 82 validated immutable responses and continue missing ids",
+  "schema_version": "sgv1-development-ocr-plan-amendment-v1",
+  "unchanged_invariants": {
+    "document_count": 710,
+    "document_set_sha256": "0b208510c1f9a7958afd2784c4a16a8e7f444fcd802d2666c8c343ac7f6a4790",
+    "engine_order": [
+      "tesseract",
+      "paddleocr",
+      "easyocr",
+      "doctr"
+    ],
+    "expected_fingerprints": {
+      "doctr": "1f871e92b89f640f563057e8db6aa6d96e9c14c466343a25fda48fc48689834a",
+      "easyocr": "22f3b395b3964d81499baf9a84e77f594156e49d48f8dde44e95a4a8a259cc76",
+      "paddleocr": "1e05174e0aae21dbe4fa985600c954c79404829cf5e868b2fd6fc5067029e894",
+      "tesseract": "5a8bd23512ef244b2393b092c79af0ac3e0a9afa497be6245fdb1bffca12b2d2"
+    },
+    "reserve_lock_sha256": "c17ada0a97d257853f25f496a872643ab9868ca31a0138874642f457af67463f",
+    "role_manifest_sha256": "69fb2b047d6c87222bb78659777eb2f42948a6c12197fb4159eb280ae5686ff2"
+  }
+}

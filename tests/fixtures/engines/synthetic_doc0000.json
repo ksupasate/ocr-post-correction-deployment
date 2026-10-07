@@ -1,0 +1,166 @@
+{
+  "adapter_version": "1",
+  "dataset_id": "synthetic",
+  "document_id": "doc-0000",
+  "duration_seconds": 0.0014049580022401642,
+  "engine_fingerprint": "d94b823637bce8f3bba7fe71e647b1a909260198544d8d71c69de90e1231f3a0",
+  "engine_id": "synth_a",
+  "host": "Supasates-MacBook-Pro.local",
+  "payload": {
+    "confidence_scale": "synthetic_0_1",
+    "document_id": "doc-0000",
+    "engine_id": "synth_a",
+    "image_sha256": "53aabb37a828b8a648728ab762e809395da98d24e5de59ba78c33831e57e1fab",
+    "profile": "visual",
+    "words": [
+      {
+        "bbox": [
+          "40.0",
+          "45.0",
+          "79.0",
+          "56.0"
+        ],
+        "conf": "1.0",
+        "det_conf": "0.973504",
+        "line_id": "line:000",
+        "text": "Date:"
+      },
+      {
+        "bbox": [
+          "82.0",
+          "45.0",
+          "100.0",
+          "56.0"
+        ],
+        "conf": "1.0",
+        "det_conf": "0.663688",
+        "line_id": "line:000",
+        "text": "26"
+      },
+      {
+        "bbox": [
+          "103.0",
+          "45.0",
+          "134.0",
+          "56.0"
+        ],
+        "conf": "0.961739",
+        "det_conf": "0.721911",
+        "line_id": "line:000",
+        "text": "Nov"
+      },
+      {
+        "bbox": [
+          "135.0",
+          "45.0",
+          "143.0",
+          "56.0"
+        ],
+        "conf": "0.55863",
+        "det_conf": "0.630478",
+        "line_id": "line:000",
+        "text": "-"
+      },
+      {
+        "bbox": [
+          "136.0",
+          "45.0",
+          "172.0",
+          "56.0"
+        ],
+        "conf": "0.852715",
+        "det_conf": "0.672412",
+        "line_id": "line:000",
+        "text": "1991"
+      },
+      {
+        "bbox": [
+          "175.0",
+          "45.0",
+          "214.0",
+          "56.0"
+        ],
+        "conf": "0.897342",
+        "det_conf": "0.617058",
+        "line_id": "line:000",
+        "text": "03:37"
+      },
+      {
+        "bbox": [
+          "40.0",
+          "74.0",
+          "72.0",
+          "86.0"
+        ],
+        "conf": "0.980574",
+        "det_conf": "0.695132",
+        "line_id": "line:001",
+        "text": "until"
+      },
+      {
+        "bbox": [
+          "75.0",
+          "74.0",
+          "139.0",
+          "89.0"
+        ],
+        "conf": "0.889645",
+        "det_conf": "0.745003",
+        "line_id": "line:001",
+        "text": "reported"
+      },
+      {
+        "bbox": [
+          "142.0",
+          "74.0",
+          "185.0",
+          "86.0"
+        ],
+        "conf": "1.0",
+        "det_conf": "0.890883",
+        "line_id": "line:001",
+        "text": "under"
+      },
+      {
+        "bbox": [
+          "187.0",
+          "74.0",
+          "240.0",
+          "89.0"
+        ],
+        "conf": "0.900016",
+        "det_conf": "0.655441",
+        "line_id": "line:001",
+        "text": "patient"
+      },
+      {
+        "bbox": [
+          "243.0",
+          "73.0",
+          "259.0",
+          "86.0"
+        ],
+        "conf": "1.0",
+        "det_conf": "0.546669",
+        "line_id": "line:001",
+        "text": "of"
+      },
+      {
+        "bbox": [
+          "262.0",
+          "74.0",
+          "339.0",
+          "89.0"
+        ],
+        "conf": "0.754622",
+        "det_conf": "0.659601",
+        "line_id": "line:001",
+        "text": "laboratory"
+      }
+    ]
+  },
+  "payload_format": "synthetic_words_v1",
+  "payload_sha256": "258e4028333b7dbe826e4b90956a6f0863a52811a5f4948cb6e6db7c7e1bc9dc",
+  "platform": "macOS-26.6.1-arm64-arm-64bit",
+  "started_at_utc": "2026-08-16T19:41:03Z"
+}

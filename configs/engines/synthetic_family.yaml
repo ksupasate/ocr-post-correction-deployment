@@ -1,0 +1,84 @@
+# Four simulated OCR engines with deliberately DIFFERENT error profiles.
+#
+# These exist so the architecture can be exercised end to end without downloading a
+# corpus or installing four recognizers, and so that cross-engine shift is genuinely
+# present in the smoke experiment rather than merely represented by four labels on
+# identical noise.
+#
+# They are simulations. Nothing measured on them is a research result.
+#
+# The four profiles differ along the axes that actually drive the research question:
+#   - which character confusions dominate (visual vs. segmentation vs. numeric)
+#   - how often words are split or merged
+#   - whether text is dropped or hallucinated
+#   - the shape of the confidence-to-correctness relationship (this is what makes
+#     calibration transfer non-trivial across engines)
+
+engines:
+  - id: synth_a
+    adapter: synthetic
+    params:
+      # Overconfident visual-confusion engine: classic scanner-style rn/m, l/1, O/0.
+      seed: 1001
+      char_error_rate: 0.045
+      confusion_profile: visual
+      split_rate: 0.010
+      merge_rate: 0.006
+      deletion_rate: 0.004
+      insertion_rate: 0.002
+      confidence_scale: synthetic_0_1
+      # Reports high confidence even when wrong.
+      confidence_bias: 0.18
+      confidence_noise: 0.05
+      confidence_informativeness: 0.55
+
+  - id: synth_b
+    adapter: synthetic
+    params:
+      # Segmentation-prone engine: fewer character errors, many split/merge boundaries.
+      seed: 1002
+      char_error_rate: 0.022
+      confusion_profile: segmentation
+      split_rate: 0.045
+      merge_rate: 0.030
+      deletion_rate: 0.006
+      insertion_rate: 0.003
+      confidence_scale: synthetic_0_100
+      confidence_bias: -0.05
+      confidence_noise: 0.12
+      confidence_informativeness: 0.80
+
+  - id: synth_c
+    adapter: synthetic
+    params:
+      # Numeric-hostile engine: mutates digits and units, which is where harmful edits
+      # matter most (a wrong dose or price is not a cosmetic error).
+      seed: 1003
+      char_error_rate: 0.035
+      confusion_profile: numeric
+      split_rate: 0.008
+      merge_rate: 0.004
+      deletion_rate: 0.010
+      insertion_rate: 0.008
+      confidence_scale: synthetic_0_1
+      confidence_bias: 0.02
+      confidence_noise: 0.20
+      confidence_informativeness: 0.35
+
+  - id: synth_d
+    adapter: synthetic
+    params:
+      # High-quality engine: low noise, well-calibrated confidence. The stratum where
+      # H4 predicts risk control matters most, because there is little to gain and much
+      # to break.
+      seed: 1004
+      char_error_rate: 0.008
+      confusion_profile: mixed
+      split_rate: 0.004
+      merge_rate: 0.003
+      deletion_rate: 0.002
+      insertion_rate: 0.001
+      confidence_scale: synthetic_0_1
+      confidence_bias: 0.0
+      confidence_noise: 0.06
+      confidence_informativeness: 0.90

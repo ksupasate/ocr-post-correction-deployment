@@ -1,0 +1,34 @@
+# The three pilot corpora, read by every engine.
+#
+# The benchmark is matched-source: every enabled engine reads every eligible page, so
+# engine shift is not confounded with document shift. That is also why the document
+# partition must hold on top of the engine axis -- see docs/cross_engine_protocol.md.
+#
+# The three tracks use DIFFERENT transcription conventions and are not interchangeable:
+#
+#   funsd     word-level annotation of scanned business forms (English)
+#   cord      word-level annotation of receipt photographs, quad geometry (English)
+#   ocrd_sbb  diplomatic line transcription of historical German print
+#
+# They are pooled for the primary analysis with gt_policy recorded per document, and
+# reported separately as a pre-registered stratified analysis. Pooling silently would be
+# indefensible; reporting only the strata would waste the cross-domain contrast.
+
+datasets:
+  - id: funsd
+    enabled: true
+    max_documents: 100
+    params:
+      split: training_data
+
+  - id: cord
+    enabled: true
+    max_documents: 100
+    params:
+      split: test
+
+  - id: ocrd_sbb
+    enabled: true
+    # No cap: the manifest's selection rule already fixed the volume set at 102 pages,
+    # and a cap here would silently truncate whole volumes out of it.
+    params: {}

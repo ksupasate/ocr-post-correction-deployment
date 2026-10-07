@@ -1,0 +1,65 @@
+# H1, reference arm: ENGINE-AWARE CALIBRATION.
+#
+# The target engine IS present in the permitted fitting and calibration environment. This
+# is not a competing method and not an unrestricted oracle: the global document partition
+# still holds, so no test document influences fitting. It is the reference condition that
+# makes the cost of engine shift measurable.
+#
+# Differs from pilot_loeo_zero_shot.yaml in exactly one field (splits.protocol), so the
+# gap between them is attributable to the protocol and nothing else.
+#
+# The run is recorded as `in_engine_oracle`, which the leakage audit recognizes as
+# contaminated BY DESIGN on the engine axis. It must never be reported as a method.
+#
+#   uv run python scripts/run_ocr_matrix.py            # one engine per process
+#   uv run ocr-risk experiment run configs/experiments/pilot_loeo_zero_shot.yaml
+#   uv run ocr-risk experiment run configs/experiments/pilot_in_engine_oracle.yaml
+#   uv run ocr-risk analyze h1 --zero-shot pilot_loeo_zero_shot --oracle pilot_in_engine_oracle
+
+extends:
+  - ../base.yaml
+  - ../datasets/pilot_corpora.yaml
+  - ../engines/four_real.yaml
+  - ../candidates/default.yaml
+  - ../verifiers/ablation_all.yaml
+
+name: pilot_in_engine_oracle
+description: >-
+  Engine-aware reference condition over the same corpora, engines, documents and methods
+  as pilot_loeo_zero_shot. The oracle arm of the H1 contrast.
+synthetic: false
+seed: 20260818
+
+splits:
+  # Both H1 arms draw on ONE frozen partition. A per-experiment partition would
+  # evaluate the two conditions on different documents and call the difference transfer.
+  partition_id: h1_pilot
+  protocol: in_engine_oracle
+  partition_seed: 20260818
+  fit_fraction: 0.6
+  calibrate_fraction: 0.2
+  # Stratified by corpus so each role holds all three transcription conventions, and by
+  # noise tertile so the low-noise stratum H4 is about exists in every role.
+  stratify_by: [dataset_id, noise_tertile]
+  allow_document_overlap: false
+  selection_scope: fit_only
+
+risk:
+  # The pre-registered reporting grid. If no method reaches a feasible operating point at
+  # any of them, that is the result: a coarser grid must not be substituted afterwards to
+  # manufacture a non-zero number.
+  epsilon_grid: [0.01, 0.005, 0.001]
+  delta: 0.1
+  controller: ltt_bentkus
+  coverage_unit: site
+  harm_policy: strict_worsening
+  sensitivity_harm_policies: [strict_worsening, non_improving, exact_only]
+  site_policy: argmax_above_tau
+  n_threshold_grid: 200
+
+stats:
+  n_bootstrap: 10000
+  ci_level: 0.95
+  bootstrap_unit: document
+  multiplicity: holm
+  bootstrap_seed: 7

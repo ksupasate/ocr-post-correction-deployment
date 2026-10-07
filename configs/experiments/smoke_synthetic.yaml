@@ -1,0 +1,71 @@
+# SYNTHETIC end-to-end architecture test.
+#
+# Purpose: prove that the fifteen pipeline stages compose, that provenance links, that the
+# leakage guards hold, and that a figure and a table can be produced from immutable
+# artifacts. It runs in under two minutes with no network, no GPU, and no dataset.
+#
+# It is NOT an experiment. Every number it produces comes from simulated engines with
+# hand-chosen error profiles and is watermarked SYNTHETIC - NOT A RESEARCH RESULT.
+
+extends:
+  - ../base.yaml
+  - ../datasets/synthetic.yaml
+  - ../engines/synthetic_family.yaml
+  - ../candidates/default.yaml
+  - ../verifiers/ablation_all.yaml
+
+name: smoke_synthetic
+description: >-
+  Synthetic leave-one-engine-out smoke experiment. Architecture validation only; produces
+  no research findings.
+synthetic: true
+seed: 20260817
+
+# Small corpus and reduced resampling keep the smoke run fast. Both are recorded in the
+# config hash, so a smoke run can never be confused with a full experiment.
+datasets:
+  - id: synthetic
+    enabled: true
+    params:
+      n_documents: 48
+      seed: 20260817
+      page_width: 900
+      page_height: 560
+      lines_per_page: [8, 14]
+      content_families: [prose, dosage, price, part_number, date, person_name]
+      font_sizes: [16, 18, 20]
+      noise_levels: [clean, light, moderate]
+
+stats:
+  n_bootstrap: 400
+  ci_level: 0.95
+  bootstrap_unit: document
+  multiplicity: holm
+  bootstrap_seed: 7
+
+risk:
+  # Coarser than the real protocol on purpose. With 48 synthetic documents there is no
+  # statistical basis for resolving a 0.1% harm tolerance, and the 0.30 entry exists so
+  # the smoke run exercises the ACCEPT path: this candidate pool is ~93% harmful (it is
+  # dominated by adversarial hard negatives), so no verifier can certify a deployment-
+  # grade tolerance on it. 0.30 is an architecture-validation setting, not a tolerance
+  # anyone would deploy at, and the smoke artifacts are watermarked accordingly.
+  epsilon_grid: [0.30, 0.05, 0.01]
+  delta: 0.1
+  controller: ltt_bentkus
+  coverage_unit: site
+  harm_policy: strict_worsening
+  sensitivity_harm_policies: [strict_worsening, non_improving, exact_only]
+  site_policy: argmax_above_tau
+  n_threshold_grid: 100
+
+splits:
+  protocol: loeo_zero_shot
+  partition_seed: 20260817
+  fit_fraction: 0.6
+  calibrate_fraction: 0.2
+  stratify_by: [dataset_id, noise_tertile]
+  few_shot_k: [5, 10]
+  few_shot_repeats: 5
+  allow_document_overlap: false
+  selection_scope: fit_only

@@ -1,0 +1,39 @@
+# Evidence ablation ladder V0-V6.
+#
+# The scientific comparison this exists for is V3 (text + confidence) against V6 (full
+# evidence): does the source image carry information about whether an edit is beneficial
+# beyond what text and confidence already provide? V4 and V5 are included so that a null
+# V3-vs-V6 result is interpretable rather than ambiguous.
+#
+# Masking is applied to the evidence bundle BEFORE the verifier is constructed, so an
+# ablation cannot read a channel it is meant to exclude.
+
+verifiers:
+  - id: v0_accept_all
+    kind: accept_all
+    evidence_config: v0
+    # Degenerate reference point: coverage 1.0 at whatever risk the candidate pool carries.
+
+  - id: v1_conf
+    kind: feature_logistic
+    evidence_config: v1
+
+  - id: v2_text
+    kind: feature_logistic
+    evidence_config: v2
+
+  - id: v3_text_conf
+    kind: feature_logistic
+    evidence_config: v3
+
+  - id: v4_image
+    kind: feature_logistic
+    evidence_config: v4
+
+  - id: v5_image_text
+    kind: feature_logistic
+    evidence_config: v5
+
+  - id: v6_full
+    kind: feature_logistic
+    evidence_config: v6

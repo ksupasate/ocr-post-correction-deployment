@@ -1,0 +1,103 @@
+{
+  "analysis_roles": [
+    "TRAIN",
+    "CALIBRATION",
+    "DEVELOPMENT"
+  ],
+  "candidate_generation": {
+    "candidate_id_policy": "sha256 over frozen site/edit identity",
+    "deduplication_unit": "site_id + candidate_text, incumbent first",
+    "full_audit_ladder": [
+      "b0_conf_only",
+      "g3_edit_aware",
+      "g7_structural_v2",
+      "g8_union"
+    ],
+    "identity_policy": "candidate_text == original_ocr is excluded",
+    "primary_natural_stream": "g8_union",
+    "union_cap": 4,
+    "union_order": [
+      "g3_edit_aware",
+      "g7_structural_v2"
+    ]
+  },
+  "code_sha256": {
+    "scripts/sgv1_development_candidates.py": "b2452962b8541dfc154ffae56d844955c450e89cea7c599ecb4a281822b80e54",
+    "src/ocr_risk/candidates/edit_aware.py": "806b20c4d1f139f2ddcbaae9fd63fc28fe011a728580b9c4bc1147a99d465598",
+    "src/ocr_risk/candidates/lexical.py": "89157b806357c6983df6cbc2482eb647d82be32e4965b5a540d41dac4d2f74a7",
+    "src/ocr_risk/candidates/structural_v2.py": "7e7cd84d76e95a9878af94e87aa86d30d19f52486246f3d5e93bd8fec08fe936",
+    "src/ocr_risk/discovery/enumerator.py": "5356120a2db76ea13e8e3ff682fd922b7d7a7c8b79dfbc4cd946b7ec6f1e6aa1",
+    "src/ocr_risk/discovery/views.py": "745dc2ff9f5caddcc139fe777739024c5a3fb1d35063a30aabd6e0b06b114ad4",
+    "src/ocr_risk/experiments/cgv3_confirmatory.py": "cd31b78b62f346748534677e471bfe3041258ef52175119865b9e30689d23457",
+    "src/ocr_risk/experiments/cgv3_track_a.py": "85a694b90928e40af2b8a638363fcdf09c71a4b6652f875d8a6dc70d4633bdd7",
+    "src/ocr_risk/experiments/sgv1_frames.py": "d1f980c016e3be2a6f3876bd9b2ce9a6bcbd0025f06c69e5481a2321b4545189",
+    "src/ocr_risk/experiments/sgv1_reserve.py": "eabe3fbec6a7f082942c4dc27b124b3671a03561d018369778902b1a4a403095"
+  },
+  "confirmatory_accessed": false,
+  "forbidden_inputs": [
+    "annotations",
+    "ground truth",
+    "alignments",
+    "candidate outcome labels",
+    "verifier scores",
+    "confirmatory document content"
+  ],
+  "freeze_order": [
+    "canonical_ocr",
+    "sites_pre_gt",
+    "candidates_pre_gt",
+    "labels_after_freeze_only"
+  ],
+  "ground_truth_allowed": false,
+  "inputs": {
+    "manifests/sgv1/confirmatory_reserve_lock.json": "c17ada0a97d257853f25f496a872643ab9868ca31a0138874642f457af67463f",
+    "manifests/sgv1/role_manifest.json": "69fb2b047d6c87222bb78659777eb2f42948a6c12197fb4159eb280ae5686ff2",
+    "results/generated/sgv1/corpus_qualification/c1_cord_certificate.json": "3101f57c4d45ed79bc86498fd4ad13724b6af6ee6d9eca3957b80e6eb8cdb811",
+    "results/generated/sgv1/dev_ocr/canonical_ocr_freeze.json": "af6784d6e7ccbb686a1957a10c08c8590d1f64c41f375f39e12963fcad806b35",
+    "results/generated/sgv1/dev_ocr/canonical_spans.parquet": "d1c545e0238ac598fdf47b6534e7121818f8a1f7e5d971003fbd57826bd726e0",
+    "results/generated/sgv1/reserve/pre_access_freshness_snapshot.json": "4eb1d26283e7d331f5a971b435ad3d8deafda020f77788a51dddd4e2809cce39"
+  },
+  "issued_head": "0d24e2620a78b7e70fe69acacbd5c84b7fdbdde9",
+  "issued_utc": "2026-08-31T06:44:16Z",
+  "resource_fit": {
+    "document_count": 444,
+    "document_set_sha256": "1e7cf0ff8912a702c20c3412988c1a60d60853d0c886b1de671b36e8a75e6c21",
+    "ground_truth_allowed": false,
+    "held_out_engine_rule": "(E \\ {held_out}) x TRAIN OCR streams",
+    "roles": [
+      "TRAIN"
+    ]
+  },
+  "role_counts": {
+    "CALIBRATION": 133,
+    "CONFIRMATORY": 177,
+    "DEVELOPMENT": 133,
+    "TRAIN": 444
+  },
+  "schema_version": "sgv1-development-candidate-plan-v1",
+  "scientific_scope": "SGV1 development upstream freeze only",
+  "selection": {
+    "document_count": 710,
+    "document_set_sha256": "0b208510c1f9a7958afd2784c4a16a8e7f444fcd802d2666c8c343ac7f6a4790",
+    "engines": [
+      "doctr",
+      "easyocr",
+      "paddleocr",
+      "tesseract"
+    ],
+    "pair_count": 2840
+  },
+  "site_discovery": {
+    "empty_pair_policy": "retain and enumerate in site freeze; never silently drop",
+    "implementation": "corrected CGV3 OCR-only OcrPageView + enumerate_sites",
+    "rules": {
+      "conf_floor": 0.55,
+      "conf_floor_by_engine": {},
+      "enable_boundary_rule": false,
+      "gap_mad_k": 6.0,
+      "gap_min_pixels": 1.0,
+      "lexical_min_length": 3,
+      "require_lexical_neighbour": true
+    }
+  }
+}

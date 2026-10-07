@@ -1,0 +1,56 @@
+{
+  "schema_version": "sgv1-pre-role-access-exclusions-v1",
+  "issued_utc": "2026-08-29T17:03:31Z",
+  "purpose": "Fail-closed record of candidate-pool documents exposed before the SGV1 role manifest was frozen.",
+  "events": [
+    {
+      "event_id": "hf-dataset-card-preview-20260829",
+      "source": "https://huggingface.co/datasets/naver-clova-ix/cord-v2",
+      "cause": "The authoritative dataset landing page rendered its built-in annotation preview while source and licence metadata were being verified.",
+      "access": {
+        "annotation_preview_rendered": true,
+        "source_images_visually_inspected": false,
+        "ocr_run": false,
+        "candidate_generation_run": false,
+        "verifier_scoring_run": false
+      },
+      "document_ids": [
+        "cord-train-0000",
+        "cord-train-0001",
+        "cord-train-0002",
+        "cord-train-0003",
+        "cord-train-0004",
+        "cord-train-0005",
+        "cord-train-0006",
+        "cord-train-0007",
+        "cord-train-0008",
+        "cord-train-0009",
+        "cord-train-0010",
+        "cord-train-0011",
+        "cord-train-0012",
+        "cord-train-0013",
+        "cord-train-0014",
+        "cord-train-0015",
+        "cord-train-0016",
+        "cord-train-0017",
+        "cord-train-0018",
+        "cord-train-0019",
+        "cord-train-0020",
+        "cord-train-0021",
+        "cord-train-0022",
+        "cord-train-0023",
+        "cord-train-0024",
+        "cord-train-0025"
+      ],
+      "disposition": {
+        "confirmatory_eligible": false,
+        "allowed_roles": [
+          "TRAIN",
+          "CALIBRATION",
+          "DEVELOPMENT"
+        ],
+        "reason": "Manual/model-visible annotation exposure before role freeze permanently disqualifies these rows from the untouched confirmatory reserve."
+      }
+    }
+  ]
+}

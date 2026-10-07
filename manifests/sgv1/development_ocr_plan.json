@@ -1,0 +1,95 @@
+{
+  "allowed_roles": [
+    "TRAIN",
+    "CALIBRATION",
+    "DEVELOPMENT"
+  ],
+  "c1_certificate_sha256": "3101f57c4d45ed79bc86498fd4ad13724b6af6ee6d9eca3957b80e6eb8cdb811",
+  "canonicalization": {
+    "ground_truth_allowed": false,
+    "source": "raw responses only",
+    "unicode_policy": "nfc"
+  },
+  "document_count": 710,
+  "document_counts_by_role": {
+    "CALIBRATION": 133,
+    "DEVELOPMENT": 133,
+    "TRAIN": 444
+  },
+  "document_set_sha256": "0b208510c1f9a7958afd2784c4a16a8e7f444fcd802d2666c8c343ac7f6a4790",
+  "engine_config_path": "configs/engines/four_real.yaml",
+  "engine_config_sha256": "a5386964ed5b53e07e8f78d20690deca775965a8c9e6b13f9feb49f6832a50a8",
+  "engine_order": [
+    "tesseract",
+    "paddleocr",
+    "easyocr",
+    "doctr"
+  ],
+  "engines": {
+    "doctr": {
+      "adapter": "doctr",
+      "device_policy": "CPU; EasyOCR gpu=False; docTR predictor is never moved to an accelerator; Tesseract is an external CPU binary; PaddleOCR uses the installed macOS CPU backend",
+      "engine_id": "doctr",
+      "expected_fingerprint": "1f871e92b89f640f563057e8db6aa6d96e9c14c466343a25fda48fc48689834a",
+      "historical_cord_test_pointer": "data/raw/ocr/cord/doctr/fingerprint.json",
+      "historical_cord_test_pointer_sha256": "8a1cccc47c7043bd8f0351f2ed80b270e673d97c17ef4e3640bc7ede8c6726fd",
+      "historical_cord_test_responses": 100,
+      "params": {},
+      "selected_responses_before_plan": 0
+    },
+    "easyocr": {
+      "adapter": "easyocr",
+      "device_policy": "CPU; EasyOCR gpu=False; docTR predictor is never moved to an accelerator; Tesseract is an external CPU binary; PaddleOCR uses the installed macOS CPU backend",
+      "engine_id": "easyocr",
+      "expected_fingerprint": "22f3b395b3964d81499baf9a84e77f594156e49d48f8dde44e95a4a8a259cc76",
+      "historical_cord_test_pointer": "data/raw/ocr/cord/easyocr/fingerprint.json",
+      "historical_cord_test_pointer_sha256": "bec43ad9f5badffc6044a49a000deebf899eb934285f89370abafa815ef12ae1",
+      "historical_cord_test_responses": 100,
+      "params": {
+        "languages": [
+          "en"
+        ]
+      },
+      "selected_responses_before_plan": 0
+    },
+    "paddleocr": {
+      "adapter": "paddleocr",
+      "device_policy": "CPU; EasyOCR gpu=False; docTR predictor is never moved to an accelerator; Tesseract is an external CPU binary; PaddleOCR uses the installed macOS CPU backend",
+      "engine_id": "paddleocr",
+      "expected_fingerprint": "1e05174e0aae21dbe4fa985600c954c79404829cf5e868b2fd6fc5067029e894",
+      "historical_cord_test_pointer": "data/raw/ocr/cord/paddleocr/fingerprint.json",
+      "historical_cord_test_pointer_sha256": "a71b46e111ff9a067ff7757be63ab6c8993b5f734901c10208f5193460ee6e26",
+      "historical_cord_test_responses": 100,
+      "params": {
+        "lang": "en"
+      },
+      "selected_responses_before_plan": 0
+    },
+    "tesseract": {
+      "adapter": "tesseract",
+      "device_policy": "CPU; EasyOCR gpu=False; docTR predictor is never moved to an accelerator; Tesseract is an external CPU binary; PaddleOCR uses the installed macOS CPU backend",
+      "engine_id": "tesseract",
+      "expected_fingerprint": "5a8bd23512ef244b2393b092c79af0ac3e0a9afa497be6245fdb1bffca12b2d2",
+      "historical_cord_test_pointer": "data/raw/ocr/cord/tesseract/fingerprint.json",
+      "historical_cord_test_pointer_sha256": "dfb4fc0e90181fff6e4b11231d6c55496ff7818eb697c86c3cf627f7ec0ac5e4",
+      "historical_cord_test_responses": 100,
+      "params": {
+        "lang": "eng",
+        "oem": 3,
+        "psm": 6
+      },
+      "selected_responses_before_plan": 0
+    }
+  },
+  "failure_rule": "record every failure and refuse matrix completion while any pair is missing",
+  "issued_utc": "2026-08-30T12:46:48Z",
+  "pre_access_snapshot_sha256": "4eb1d26283e7d331f5a971b435ad3d8deafda020f77788a51dddd4e2809cce39",
+  "raw_storage": "data/raw/ocr/cord/<engine>/<fingerprint-prefix-8>/<document-id>.json; write-once",
+  "reserve_lock_sha256": "c17ada0a97d257853f25f496a872643ab9868ca31a0138874642f457af67463f",
+  "resume_rule": "validate and skip an existing exact-fingerprint response; retry missing ids",
+  "role_manifest_sha256": "69fb2b047d6c87222bb78659777eb2f42948a6c12197fb4159eb280ae5686ff2",
+  "runner_path": "scripts/sgv1_development_ocr.py",
+  "runner_sha256": "0e551c0bd78a2ea4cfe5d14308b8f3d32d24a828da4a0a967e78b562c853da56",
+  "schema_version": "sgv1-development-ocr-plan-v1",
+  "scientific_scope": "SGV1 development OCR only; CONFIRMATORY remains locked"
+}

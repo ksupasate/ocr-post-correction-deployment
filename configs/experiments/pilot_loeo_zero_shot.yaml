@@ -1,0 +1,61 @@
+# H1, headline arm: leave-one-engine-out ZERO SHOT.
+#
+# For each held-out engine e, the target engine contributes nothing to model fitting,
+# calibrator fitting, confidence normalization, threshold selection, or hyperparameter
+# selection. Four folds, one per engine.
+#
+# Read against pilot_in_engine_oracle.yaml, which differs in exactly one field
+# (splits.protocol) so the contrast is attributable to the protocol and nothing else.
+#
+#   uv run python scripts/run_ocr_matrix.py            # one engine per process
+#   uv run ocr-risk experiment run configs/experiments/pilot_loeo_zero_shot.yaml
+#   uv run ocr-risk experiment run configs/experiments/pilot_in_engine_oracle.yaml
+#   uv run ocr-risk analyze h1 --zero-shot pilot_loeo_zero_shot --oracle pilot_in_engine_oracle
+
+extends:
+  - ../base.yaml
+  - ../datasets/pilot_corpora.yaml
+  - ../engines/four_real.yaml
+  - ../candidates/default.yaml
+  - ../verifiers/ablation_all.yaml
+
+name: pilot_loeo_zero_shot
+description: >-
+  Four-fold leave-one-engine-out over FUNSD, CORD and OCR-D, read by Tesseract,
+  PaddleOCR, EasyOCR and docTR. The zero-shot arm of the H1 contrast.
+synthetic: false
+seed: 20260818
+
+splits:
+  # Both H1 arms draw on ONE frozen partition. A per-experiment partition would
+  # evaluate the two conditions on different documents and call the difference transfer.
+  partition_id: h1_pilot
+  protocol: loeo_zero_shot
+  partition_seed: 20260818
+  fit_fraction: 0.6
+  calibrate_fraction: 0.2
+  # Stratified by corpus so each role holds all three transcription conventions, and by
+  # noise tertile so the low-noise stratum H4 is about exists in every role.
+  stratify_by: [dataset_id, noise_tertile]
+  allow_document_overlap: false
+  selection_scope: fit_only
+
+risk:
+  # The pre-registered reporting grid. If no method reaches a feasible operating point at
+  # any of them, that is the result: a coarser grid must not be substituted afterwards to
+  # manufacture a non-zero number.
+  epsilon_grid: [0.01, 0.005, 0.001]
+  delta: 0.1
+  controller: ltt_bentkus
+  coverage_unit: site
+  harm_policy: strict_worsening
+  sensitivity_harm_policies: [strict_worsening, non_improving, exact_only]
+  site_policy: argmax_above_tau
+  n_threshold_grid: 200
+
+stats:
+  n_bootstrap: 10000
+  ci_level: 0.95
+  bootstrap_unit: document
+  multiplicity: holm
+  bootstrap_seed: 7

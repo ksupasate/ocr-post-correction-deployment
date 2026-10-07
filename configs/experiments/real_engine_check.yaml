@@ -1,0 +1,127 @@
+# Validation run against a REAL OCR engine.
+#
+# Purpose: prove the engine abstraction, the write-once raw layer, and canonicalization
+# work against genuine, messy engine output — not only against the simulated family.
+# Simulated engines produce exactly the shapes our parser expects, so they cannot catch a
+# wrong assumption about what a real recognizer emits.
+#
+# Not part of CI (the binary is not installed there) and not part of the headline
+# protocol. Run locally:
+#
+#   ocr-risk data synth
+#   ocr-risk data manifest configs/experiments/real_engine_check.yaml
+#   ocr-risk ocr run       configs/experiments/real_engine_check.yaml
+#   ocr-risk ocr canonicalize configs/experiments/real_engine_check.yaml
+#
+# The source documents are still synthetic, so nothing here is a research result either.
+
+extends:
+  - ../base.yaml
+  - ../datasets/synthetic.yaml
+  - ../engines/synthetic_family.yaml
+  - ../engines/tesseract.yaml
+  - ../candidates/default.yaml
+  - ../verifiers/ablation_all.yaml
+
+name: real_engine_check
+description: >-
+  Runs real Tesseract alongside the simulated engine family over synthetic pages, to
+  validate the adapter contract against genuine engine output.
+synthetic: true
+seed: 20260817
+
+# A real engine plus four simulated ones. Note that `engines:` replaces rather than
+# merges, so both fragments' entries are restated here.
+engines:
+  - id: tesseract
+    adapter: tesseract
+    params:
+      lang: eng
+      psm: 3
+      oem: 3
+  - id: synth_a
+    adapter: synthetic
+    params:
+      seed: 1001
+      char_error_rate: 0.045
+      confusion_profile: visual
+      split_rate: 0.010
+      merge_rate: 0.006
+      deletion_rate: 0.004
+      insertion_rate: 0.002
+      confidence_scale: synthetic_0_1
+      confidence_bias: 0.18
+      confidence_noise: 0.05
+      confidence_informativeness: 0.55
+  - id: synth_b
+    adapter: synthetic
+    params:
+      seed: 1002
+      char_error_rate: 0.022
+      confusion_profile: segmentation
+      split_rate: 0.045
+      merge_rate: 0.030
+      deletion_rate: 0.006
+      insertion_rate: 0.003
+      confidence_scale: synthetic_0_100
+      confidence_bias: -0.05
+      confidence_noise: 0.12
+      confidence_informativeness: 0.80
+  - id: synth_c
+    adapter: synthetic
+    params:
+      seed: 1003
+      char_error_rate: 0.035
+      confusion_profile: numeric
+      split_rate: 0.008
+      merge_rate: 0.004
+      deletion_rate: 0.010
+      insertion_rate: 0.008
+      confidence_scale: synthetic_0_1
+      confidence_bias: 0.02
+      confidence_noise: 0.20
+      confidence_informativeness: 0.35
+  - id: synth_d
+    adapter: synthetic
+    params:
+      seed: 1004
+      char_error_rate: 0.008
+      confusion_profile: mixed
+      split_rate: 0.004
+      merge_rate: 0.003
+      deletion_rate: 0.002
+      insertion_rate: 0.001
+      confidence_scale: synthetic_0_1
+      confidence_bias: 0.0
+      confidence_noise: 0.06
+      confidence_informativeness: 0.90
+
+datasets:
+  - id: synthetic
+    enabled: true
+    params:
+      n_documents: 48
+      seed: 20260817
+      page_width: 900
+      page_height: 560
+      lines_per_page: [8, 14]
+      content_families: [prose, dosage, price, part_number, date, person_name]
+      font_sizes: [16, 18, 20]
+      noise_levels: [clean, light, moderate]
+
+risk:
+  epsilon_grid: [0.05, 0.01]
+  delta: 0.1
+  controller: ltt_bentkus
+  coverage_unit: site
+  harm_policy: strict_worsening
+  sensitivity_harm_policies: [strict_worsening, non_improving, exact_only]
+  site_policy: argmax_above_tau
+  n_threshold_grid: 100
+
+stats:
+  n_bootstrap: 400
+  ci_level: 0.95
+  bootstrap_unit: document
+  multiplicity: holm
+  bootstrap_seed: 7
