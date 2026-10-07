@@ -62,8 +62,8 @@
     },
     {
       "relative_path": "README.md",
-      "sha256": "5346d495228b66001406649c13c40a9591be59874302d149910be0d4ebae2c4c",
-      "byte_size": 4990,
+      "sha256": "582f948933f32ffb5e59f9f3cbadea2f5bbe788d0a07584b7660e8454658369f",
+      "byte_size": 7281,
       "purpose": "release documentation or support",
       "source": "Authored from identified frozen sources",
       "generated": true,
@@ -73,8 +73,8 @@
     },
     {
       "relative_path": "RELEASE_NOTES.md",
-      "sha256": "814593795bacee6f31ef6ed39e23c124674ac54796f21f5fb43b7bf2f63ba677",
-      "byte_size": 1075,
+      "sha256": "1cfa82c5b9a9db0f4e3518c268d1c3d26c1bd94df78a35e98a4b2a291f2547f7",
+      "byte_size": 976,
       "purpose": "release documentation or support",
       "source": "Authored from identified frozen sources",
       "generated": true,
@@ -299,8 +299,8 @@
     },
     {
       "relative_path": "docs/RELEASE_PREPARATION.md",
-      "sha256": "5ef972a803ee6dcc1c366c472c53ba41d7316d35fd8de572386b48e83f8f76c5",
-      "byte_size": 1860,
+      "sha256": "ff9910a4ad1ae14fc6cfa0aa021e39e2d3f71113611f69fb94aa2e54021aa9a0",
+      "byte_size": 1941,
       "purpose": "release documentation or support",
       "source": "Authored from identified frozen sources",
       "generated": true,
@@ -310,8 +310,8 @@
     },
     {
       "relative_path": "docs/REPRODUCIBILITY_TEST_REPORT.md",
-      "sha256": "01edd7adba6f544b66c6c836960edc86f9bd0a100cb5a34da670735ea1b5386a",
-      "byte_size": 5934,
+      "sha256": "b3f648886e1ed31f49b7fc67d25f8027896c615db8762b46658bb4746a93421a",
+      "byte_size": 3511,
       "purpose": "release documentation or support",
       "source": "Authored from identified frozen sources",
       "generated": true,
